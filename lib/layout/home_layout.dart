@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:project/home_screen.dart';
+import 'package:project/modules/Home_screen/home_screen.dart';
 
 class Layout_screen extends StatefulWidget {
 
