@@ -186,6 +186,7 @@ class _Home_screenState extends State<Home_screen> {
                     Container(
                       width: double.infinity,
                       child: ListView.separated(
+                          scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemBuilder: (context, index) => buildd(),
                           separatorBuilder: (context, index) => SizedBox(
@@ -474,21 +475,19 @@ class _Home_screenState extends State<Home_screen> {
   Widget buildcategoryitem() {
     return Container(
       height: 50,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: HexColor("#F5F6FA"),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextButton(
-          onPressed: () {},
-          child: Text(
-            'smartphones',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 20,
-              color: HexColor("#1D1E20"),
-            ),
+      child: TextButton(
+        onPressed: () {},
+        child: Text(
+          'smartphones',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+            color: HexColor("#1D1E20"),
           ),
         ),
       ),
