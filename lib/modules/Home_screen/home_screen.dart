@@ -186,6 +186,7 @@ class _Home_screenState extends State<Home_screen> {
                     Container(
                       width: double.infinity,
                       child: ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemBuilder: (context, index) => buildd(),
@@ -417,9 +418,6 @@ class _Home_screenState extends State<Home_screen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 5,
-              ),
               Row(
                 children: [
                   Text(
@@ -464,14 +462,13 @@ class _Home_screenState extends State<Home_screen> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ],
     );
   }
-
   Widget buildcategoryitem() {
     return Container(
       height: 50,
