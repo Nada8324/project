@@ -43,152 +43,161 @@ class _Home_screenState extends State<Home_screen> {
           SizedBox(
             height: 40,
           ),
-          Text(
-            'HELLO',
-            style: TextStyle(
-              color: HexColor("#1D1E20"),
-              fontWeight: FontWeight.w600,
-              fontSize: 28,
-              fontFamily: ('Inter'),
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            'Welcome to Laza.',
-            style: TextStyle(
-              color: HexColor("#8F959E"),
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
-              fontFamily: ('Inter'),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  width: 275,
-                  height: 50,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        labelText: ("Search..."),
-                        border: InputBorder.none),
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: HexColor("#F5F6FA"),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: HexColor("#4A4E69"),
-                ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.search,
-                    color: HexColor("#FEFEFE"),
-                  ),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Text(
-                'Categories',
-                style: TextStyle(
-                    color: HexColor('#1D1E20'),
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500),
-              ),
-              Spacer(),
-              TextButton(
-                onPressed: () {
-                  scaffoldkey.currentState!.showBottomSheet(
-                    (context) => Container(
-                      height: 200,
-                      width: double.infinity,
-                      color: Colors.red,
-                      child: Text('knk'),
-                      decoration: BoxDecoration(),
-                    ),
-                    backgroundColor: Colors.blue,
-                    // shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    // ),
-                  );
-                },
-                child: Text(
-                  'View All',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                    color: HexColor('#8F959E'),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            height: 50,
-            child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return buildcategoryitem();
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(
-                    width: 10.0,
-                  );
-                },
-                itemCount: 6),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            'All Products',
-            style: TextStyle(
-              color: HexColor('#1D1E20'),
-              fontWeight: FontWeight.w500,
-              fontSize: 17,
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
+
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                width: double.infinity,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => buildd(),
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 15,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'HELLO',
+                      style: TextStyle(
+                        color: HexColor("#1D1E20"),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 28,
+                        fontFamily: ('Inter'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      'Welcome to Laza.',
+                      style: TextStyle(
+                        color: HexColor("#8F959E"),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        fontFamily: ('Inter'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 275,
+                            height: 50,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.search),
+                                  labelText: ("Search..."),
+                                  border: InputBorder.none),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: HexColor("#F5F6FA"),
+                            ),
+                          ),
                         ),
-                    itemCount: 10),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: HexColor("#4A4E69"),
+                          ),
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.search,
+                              color: HexColor("#FEFEFE"),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Categories',
+                          style: TextStyle(
+                              color: HexColor('#1D1E20'),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Spacer(),
+                        TextButton(
+                          onPressed: () {
+                            scaffoldkey.currentState!.showBottomSheet(
+                              (context) => Container(
+                                height: 200,
+                                width: double.infinity,
+                                color: Colors.red,
+                                child: Text('knk'),
+                                decoration: BoxDecoration(),
+                              ),
+                              backgroundColor: Colors.blue,
+                              // shape: RoundedRectangleBorder(
+                              //     borderRadius: BorderRadius.all(Radius.circular(20)),
+                              // ),
+                            );
+                          },
+                          child: Text(
+                            'View All',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              color: HexColor('#8F959E'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      height: 50,
+                      child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return buildcategoryitem();
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              width: 10.0,
+                            );
+                          },
+                          itemCount: 6),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'All Products',
+                      style: TextStyle(
+                        color: HexColor('#1D1E20'),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      width: double.infinity,
+
+                      child: ListView.separated(
+                        shrinkWrap: true,
+
+                          itemBuilder: (context, index) => buildd(),
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: 15,
+                              ),
+                          itemCount: 10),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -214,8 +223,8 @@ class _Home_screenState extends State<Home_screen> {
                     Image(
                       image: NetworkImage(
                           'https://i.dummyjson.com/data/products/1/2.jpg'),
-                      height: 215,
-                      fit: BoxFit.cover,
+
+                      fit: BoxFit.fitHeight,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -346,7 +355,7 @@ class _Home_screenState extends State<Home_screen> {
                       image: NetworkImage(
                           'https://i.dummyjson.com/data/products/1/2.jpg'),
                       height: 215,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitHeight,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
