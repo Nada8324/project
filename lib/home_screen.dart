@@ -10,116 +10,479 @@ class Home_screen extends StatefulWidget {
 
 class _Home_screenState extends State<Home_screen> {
   @override
+  bool favourite = false;
+  var iconkey = GlobalKey();
+  var scaffoldkey = GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
-    return
-      Container(
-        color: HexColor('#FEFEFE'),
-        child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          // extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            leading: CircleAvatar(
-              child: IconButton(onPressed:(){
-              },icon: Icon(Icons.menu,color: Colors.grey[900])),
-              radius: 22.5,
-              backgroundColor: Colors.grey[200],
-            ),
-            actions:
-            [
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: HexColor('#FEFEFE'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
               CircleAvatar(
-              child: IconButton(onPressed: (){
-
-              }
-              ,icon: Icon(Icons.card_travel,color: Colors.grey[900])),
-              radius: 22.5,
-              backgroundColor: Colors.grey[200],
-            ),
-           ]
-            ,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.account_circle_outlined,
+                        color: Colors.grey[900])),
+                radius: 22.5,
+                backgroundColor: Colors.grey[200],
+              ),
+              Spacer(),
+              CircleAvatar(
+                child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.card_travel, color: Colors.grey[900])),
+                radius: 22.5,
+                backgroundColor: Colors.grey[200],
+              ),
+            ],
           ),
-          body: Column(
+          SizedBox(
+            height: 40,
+          ),
+          Text(
+            'HELLO',
+            style: TextStyle(
+              color: HexColor("#1D1E20"),
+              fontWeight: FontWeight.w600,
+              fontSize: 28,
+              fontFamily: ('Inter'),
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            'Welcome to Laza.',
+            style: TextStyle(
+              color: HexColor("#8F959E"),
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
+              fontFamily: ('Inter'),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  width: 275,
+                  height: 50,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        labelText: ("Search..."),
+                        border: InputBorder.none),
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: HexColor("#F5F6FA"),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: HexColor("#4A4E69"),
+                ),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.search,
+                    color: HexColor("#FEFEFE"),
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Text(
+                'Categories',
+                style: TextStyle(
+                    color: HexColor('#1D1E20'),
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500),
+              ),
+              Spacer(),
+              TextButton(
+                onPressed: () {
+                  scaffoldkey.currentState!.showBottomSheet(
+                    (context) => Container(
+                      height: 200,
+                      width: double.infinity,
+                      color: Colors.red,
+                      child: Text('knk'),
+                      decoration: BoxDecoration(),
+                    ),
+                    backgroundColor: Colors.blue,
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.all(Radius.circular(20)),
+                    // ),
+                  );
+                },
+                child: Text(
+                  'View All',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    color: HexColor('#8F959E'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            height: 50,
+            child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return buildcategoryitem();
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    width: 10.0,
+                  );
+                },
+                itemCount: 6),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            'All Products',
+            style: TextStyle(
+              color: HexColor('#1D1E20'),
+              fontWeight: FontWeight.w500,
+              fontSize: 17,
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => buildd(),
+                    separatorBuilder: (context, index) => SizedBox(
+                          height: 15,
+                        ),
+                    itemCount: 10),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildd() {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 40,
-              ),
-              Text('HELLO',style: TextStyle(
-                color:HexColor("#1D1E20"),
-                 fontWeight: FontWeight.w600,
-                 fontSize: 28,
-                fontFamily: ('Inter'),
-              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Image(
+                      image: NetworkImage(
+                          'https://i.dummyjson.com/data/products/1/2.jpg'),
+                      height: 215,
+                      fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              favourite = !favourite;
+                            });
+                          },
+                          icon: Icon(
+                              favourite
+                                  ? (Icons.favorite)
+                                  : (Icons.favorite_border),
+                              color: Colors.red,
+                              ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 5,
               ),
-              Text('Welcome to Laza.',style: TextStyle(
-                color:HexColor("#8F959E"),
-                fontWeight: FontWeight.w400,
-                fontSize: 15,
-                fontFamily: ('Inter'),
-              ),
+              Text(
+                'title',
+                style: TextStyle(
+                  color: HexColor('#1D1E20'),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 13,
+                ),
               ),
               SizedBox(
-              height: 20,
+                height: 5,
               ),
               Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      width: 275,
-                      height: 50,
-
-                      child: TextFormField(
-
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          labelText: ("Search...") ,
-                          border: InputBorder.none
-                        ),
-
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: HexColor("#F5F6FA"),
-
-                      ),
+                  Text(
+                    'EGP',
+                    style: TextStyle(
+                      color: HexColor('#1D1E20'),
+                      fontWeight: FontWeight.w200,
+                      fontSize: 11,
                     ),
                   ),
-                 SizedBox(
-                   width: 10,
-                 ),
-                  Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: HexColor("#4A4E69"),
-                      ),
-
-                        child: IconButton(onPressed: (){}, icon:
-                         Icon(
-                       Icons.search,
-                      color: HexColor("#FEFEFE"),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    '(price-((discount/100)*price))',
+                    style: TextStyle(
+                      color: HexColor('#1D1E20'),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
                     ),
-                        ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 5,
               ),
-
-
-          ],
+              Row(
+                children: [
+                  Text(
+                    'price',
+                    style: TextStyle(
+                        color: HexColor('#1D1E20'),
+                        fontWeight: FontWeight.w200,
+                        fontSize: 11,
+                        decoration: TextDecoration.lineThrough),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'dicount % OFF',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: 60,
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Row(
+                    children: [
+                      Text('rating',
+                          style: TextStyle(
+                            color: Colors.white,
+                          )),
+                      Icon(
+                        Icons.star_rate_rounded,
+                        color: Colors.white,
+                        size: 16,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-    ),
-      );
+        SizedBox(
+          width: 15,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Image(
+                      image: NetworkImage(
+                          'https://i.dummyjson.com/data/products/1/2.jpg'),
+                      height: 215,
+                      fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              favourite = !favourite;
+                            });
+                          },
+                          icon: Icon(
+                              favourite
+                                  ? (Icons.favorite)
+                                  : (Icons.favorite_border),
+                              color: Colors.red),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'title',
+                style: TextStyle(
+                  color: HexColor('#1D1E20'),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 13,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'EGP',
+                    style: TextStyle(
+                      color: HexColor('#1D1E20'),
+                      fontWeight: FontWeight.w200,
+                      fontSize: 11,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    '(price-((discount/100)*price))',
+                    style: TextStyle(
+                      color: HexColor('#1D1E20'),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'price',
+                    style: TextStyle(
+                        color: HexColor('#1D1E20'),
+                        fontWeight: FontWeight.w200,
+                        fontSize: 11,
+                        decoration: TextDecoration.lineThrough),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'dicount % OFF',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: 60,
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Row(
+                    children: [
+                      Text('rating',
+                          style: TextStyle(
+                            color: Colors.white,
+                          )),
+                      Icon(
+                        Icons.star_rate_rounded,
+                        color: Colors.white,
+                        size: 16,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildcategoryitem() {
+    return Container(
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: HexColor("#F5F6FA"),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextButton(
+          onPressed: () {},
+          child: Text(
+            'smartphones',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+              color: HexColor("#1D1E20"),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
