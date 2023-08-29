@@ -196,7 +196,6 @@ class _Home_screenState extends State<Home_screen> {
       ),
     );
   }
-
   Widget buildd() {
     return Row(
       children: [
