@@ -43,7 +43,6 @@ class _Home_screenState extends State<Home_screen> {
           SizedBox(
             height: 40,
           ),
-
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -186,10 +185,8 @@ class _Home_screenState extends State<Home_screen> {
                     ),
                     Container(
                       width: double.infinity,
-
                       child: ListView.separated(
-                        shrinkWrap: true,
-
+                          shrinkWrap: true,
                           itemBuilder: (context, index) => buildd(),
                           separatorBuilder: (context, index) => SizedBox(
                                 height: 15,
@@ -205,6 +202,7 @@ class _Home_screenState extends State<Home_screen> {
       ),
     );
   }
+
   Widget buildd() {
     return Row(
       children: [
@@ -223,8 +221,8 @@ class _Home_screenState extends State<Home_screen> {
                     Image(
                       image: NetworkImage(
                           'https://i.dummyjson.com/data/products/1/2.jpg'),
-
-                      fit: BoxFit.fitHeight,
+                      height: 200,
+                      fit: BoxFit.cover,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -237,11 +235,11 @@ class _Home_screenState extends State<Home_screen> {
                             });
                           },
                           icon: Icon(
-                              favourite
-                                  ? (Icons.favorite)
-                                  : (Icons.favorite_border),
-                              color: Colors.red,
-                              ),
+                            favourite
+                                ? (Icons.favorite)
+                                : (Icons.favorite_border),
+                            color: Colors.red,
+                          ),
                         ),
                       ),
                     ),
@@ -276,7 +274,9 @@ class _Home_screenState extends State<Home_screen> {
                     width: 5,
                   ),
                   Text(
-                    '(price-((discount/100)*price))',
+                    '123',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: HexColor('#1D1E20'),
                       fontWeight: FontWeight.w600,
@@ -354,8 +354,8 @@ class _Home_screenState extends State<Home_screen> {
                     Image(
                       image: NetworkImage(
                           'https://i.dummyjson.com/data/products/1/2.jpg'),
-                      height: 215,
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.cover,
+                      height: 200,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -406,7 +406,8 @@ class _Home_screenState extends State<Home_screen> {
                     width: 5,
                   ),
                   Text(
-                    '(price-((discount/100)*price))',
+                    '123',
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: HexColor('#1D1E20'),
                       fontWeight: FontWeight.w600,
