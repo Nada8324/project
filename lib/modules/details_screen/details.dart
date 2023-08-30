@@ -15,29 +15,78 @@ class Details_screen extends StatelessWidget {
           statusBarColor: Colors.white,
         ),
       ),
-
       body: Column(
         children: [
-          Row(
+          Stack(
             children: [
-              ElevatedButton(onPressed: (){}, child: FaIcon(FontAwesomeIcons.arrowLeft,color: Colors.grey[900])  ,
-                style: ElevatedButton.styleFrom(shape: CircleBorder(),
-                  padding: EdgeInsets.all(17),
-                  backgroundColor: Colors.white,
-                ),
+              Container(
+                  child: Image(
+                image: NetworkImage(
+                    'https://i.dummyjson.com/data/products/2/3.jpg'),
+                    fit: BoxFit.fitHeight,
               ),
-              Spacer(),
-              ElevatedButton(onPressed: (){}, child: FaIcon(FontAwesomeIcons.bagShopping,color: Colors.grey[900])  ,
-                style: ElevatedButton.styleFrom(shape: CircleBorder(),
-                  padding: EdgeInsets.all(17),
-                  backgroundColor: Colors.white,
-                ),
+                width: double.infinity,
 
               ),
-
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: FaIcon(FontAwesomeIcons.arrowLeft,
+                          color: Colors.grey[600]),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(17),
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    Spacer(),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: FaIcon(FontAwesomeIcons.bagShopping,
+                          color: Colors.grey[600]),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(17),
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('description',style: TextStyle(
+                      color: HexColor('#8F959E'),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    ),
+                    Text('title',style: TextStyle(
+                      color: HexColor('##1D1E20'),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    ),
+                    Row(
+                      children: [
+                        Container(),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
