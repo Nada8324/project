@@ -38,17 +38,16 @@ class _Layout_screenState extends State<Layout_screen> {
         currentIndex: currentindex,
         items: [
           BottomNavigationBarItem(
-              icon:
-              FaIcon(FontAwesomeIcons.house,color: HexColor('#8F959E')),
+              icon: FaIcon(FontAwesomeIcons.house, color: HexColor('#8F959E')),
               label: 'Cart'),
           BottomNavigationBarItem(
-            icon:  FaIcon(FontAwesomeIcons.heart, color: HexColor('#8F959E')),
+            icon: FaIcon(FontAwesomeIcons.heart, color: HexColor('#8F959E')),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.bagShopping, color: HexColor('#8F959E')),
+              icon: FaIcon(FontAwesomeIcons.bagShopping,
+                  color: HexColor('#8F959E')),
               label: 'Favorite'),
-
         ],
         selectedFontSize: 13,
         backgroundColor: HexColor("#1D1E2014"),

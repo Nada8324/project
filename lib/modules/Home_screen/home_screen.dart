@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project/shared/components/constants.dart';
+import 'package:project/shared/remote/dio_helper.dart';
 
 class Home_screen extends StatefulWidget {
   const Home_screen({super.key});
@@ -11,22 +13,40 @@ class Home_screen extends StatefulWidget {
 
 class _Home_screenState extends State<Home_screen> {
   @override
+  void initState() {
+    super.initState();
+    getproducts();
+
+    // SmartPhones();
+    // Laptops();
+    // Fragrances();
+    // SkinCare();
+    // Groceries();
+    // HomeDecoration();
+  }
+
+  List<dynamic> cat = [];
+  var categories = [];
+
   bool favourite = false;
   var iconkey = GlobalKey();
   var scaffoldkey = GlobalKey<ScaffoldState>();
+
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
       color: HexColor('#FEFEFE'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
+        children: [
           Row(
             children: [
               ElevatedButton(
                 onPressed: () {},
-                child:
-                FaIcon(FontAwesomeIcons.user,color: Colors.grey[900],),
+                child: FaIcon(
+                  FontAwesomeIcons.user,
+                  color: Colors.grey[900],
+                ),
                 style: ElevatedButton.styleFrom(
                   shape: CircleBorder(),
                   padding: EdgeInsets.all(17),
@@ -34,17 +54,20 @@ class _Home_screenState extends State<Home_screen> {
                 ),
               ),
               Spacer(),
-              ElevatedButton(onPressed: (){}, child: FaIcon(FontAwesomeIcons.bagShopping,color: Colors.grey[900])  ,
-                style: ElevatedButton.styleFrom(shape: CircleBorder(),
+              ElevatedButton(
+                onPressed: () {},
+                child: FaIcon(FontAwesomeIcons.bagShopping,
+                    color: Colors.grey[900]),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
                   padding: EdgeInsets.all(17),
                   backgroundColor: Colors.grey[200],
                 ),
-
               ),
             ],
           ),
           SizedBox(
-            height:5,
+            height: 5,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -53,7 +76,7 @@ class _Home_screenState extends State<Home_screen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height:35,
+                      height: 35,
                     ),
                     Text(
                       'HELLO',
@@ -166,7 +189,7 @@ class _Home_screenState extends State<Home_screen> {
                       child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return buildcategoryitem();
+                            return buildcategoryitem(index);
                           },
                           separatorBuilder: (context, index) {
                             return SizedBox(
@@ -192,14 +215,17 @@ class _Home_screenState extends State<Home_screen> {
                     Container(
                       width: double.infinity,
                       child: ListView.separated(
-                          physics: NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) => buildd(),
-                          separatorBuilder: (context, index) => SizedBox(
-                                height: 15,
-                              ),
-                          itemCount: 10),
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return buildd(index * 2);
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: 15,
+                        ),
+                        itemCount: ((products.length) / 2).round(),
+                      ),
                     ),
                   ],
                 ),
@@ -210,7 +236,8 @@ class _Home_screenState extends State<Home_screen> {
       ),
     );
   }
-  Widget buildd() {
+
+  Widget buildd(index) {
     return Row(
       children: [
         Expanded(
@@ -228,8 +255,7 @@ class _Home_screenState extends State<Home_screen> {
                     alignment: Alignment.topRight,
                     children: [
                       Image(
-                        image: NetworkImage(
-                            'https://i.dummyjson.com/data/products/1/2.jpg'),
+                        image: NetworkImage('${products[index]['thumbnail']}'),
                         height: 200,
                         fit: BoxFit.cover,
                       ),
@@ -259,7 +285,7 @@ class _Home_screenState extends State<Home_screen> {
                   height: 5,
                 ),
                 Text(
-                  'title',
+                  '${products[index]['title']}',
                   style: TextStyle(
                     color: HexColor('#1D1E20'),
                     fontWeight: FontWeight.w500,
@@ -283,7 +309,7 @@ class _Home_screenState extends State<Home_screen> {
                       width: 5,
                     ),
                     Text(
-                      '123',
+                      '${(products[index]['price'] - ((products[index]['discountPercentage'] / 100) * products[index]['price'])).round()}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -300,18 +326,18 @@ class _Home_screenState extends State<Home_screen> {
                 Row(
                   children: [
                     Text(
-                      'price',
+                      '${products[index]['price']}',
                       style: TextStyle(
                           color: HexColor('#1D1E20'),
                           fontWeight: FontWeight.w200,
-                          fontSize: 11,
+                          fontSize: 15,
                           decoration: TextDecoration.lineThrough),
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     Text(
-                      'dicount % OFF',
+                      'dicount ${products[index++]['discountPercentage']}% OFF',
                       style: TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.w600,
@@ -366,8 +392,7 @@ class _Home_screenState extends State<Home_screen> {
                     alignment: Alignment.topRight,
                     children: [
                       Image(
-                        image: NetworkImage(
-                            'https://i.dummyjson.com/data/products/1/2.jpg'),
+                        image: NetworkImage('${products[index]['thumbnail']}'),
                         fit: BoxFit.cover,
                         height: 200,
                       ),
@@ -396,7 +421,7 @@ class _Home_screenState extends State<Home_screen> {
                   height: 5,
                 ),
                 Text(
-                  'title',
+                  '${products[index]['title']}',
                   style: TextStyle(
                     color: HexColor('#1D1E20'),
                     fontWeight: FontWeight.w500,
@@ -420,7 +445,7 @@ class _Home_screenState extends State<Home_screen> {
                       width: 5,
                     ),
                     Text(
-                      '123',
+                      '${(products[index]['price'] - ((products[index]['discountPercentage'] / 100) * products[index]['price'])).round()}',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: HexColor('#1D1E20'),
@@ -433,18 +458,18 @@ class _Home_screenState extends State<Home_screen> {
                 Row(
                   children: [
                     Text(
-                      'price',
+                      '${products[index]['price']}',
                       style: TextStyle(
                           color: HexColor('#1D1E20'),
                           fontWeight: FontWeight.w200,
-                          fontSize: 11,
+                          fontSize: 15,
                           decoration: TextDecoration.lineThrough),
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     Text(
-                      'dicount % OFF',
+                      'dicount ${products[index]['discountPercentage']}% OFF',
                       style: TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.w600,
@@ -482,7 +507,8 @@ class _Home_screenState extends State<Home_screen> {
       ],
     );
   }
-  Widget buildcategoryitem() {
+
+  Widget buildcategoryitem(index) {
     return Container(
       height: 50,
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -493,7 +519,7 @@ class _Home_screenState extends State<Home_screen> {
       child: TextButton(
         onPressed: () {},
         child: Text(
-          'smartphones',
+          '${categories[index]}',
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 20,
@@ -503,4 +529,66 @@ class _Home_screenState extends State<Home_screen> {
       ),
     );
   }
+
+  void getproducts() {
+    DioHelper.get(
+      url: 'products',
+    ).then((value) {
+      products = value.data['products'];
+      products.forEach((element) {
+        cat.add(element['category']);
+      });
+      categories = cat.toSet().toList();
+    });
+  }
+
+  // List<dynamic> smartPhones = [];
+  // List<dynamic> laptops = [];
+  // List<dynamic> fragrances = [];
+  // List<dynamic> skinCare = [];
+  // List<dynamic> groceries = [];
+  // List<dynamic> home_decoration = [];
+  //
+  // void SmartPhones() {
+  //   products.forEach((element) {
+  //     if (element['category'] == 'smartphones') smartPhones.add(element);
+  //   });
+  //   print(smartPhones.length);
+  // }
+  //
+  // void Laptops() {
+  //   products.forEach((element) {
+  //     if (element['category'] == 'laptops') laptops.add(element);
+  //   });
+  //   print(laptops.length);
+  // }
+  //
+  // void Fragrances() {
+  //   products.forEach((element) {
+  //     if (element['category'] == 'fragrances') fragrances.add(element);
+  //   });
+  //   print(fragrances.length);
+  // }
+  //
+  // void SkinCare() {
+  //   products.forEach((element) {
+  //     if (element['category'] == 'skincare') skinCare.add(element);
+  //   });
+  //   print(skinCare.length);
+  // }
+  //
+  // void Groceries() {
+  //   products.forEach((element) {
+  //     if (element['category'] == 'groceries') groceries.add(element);
+  //   });
+  //   print(groceries.length);
+  // }
+  //
+  // void HomeDecoration() {
+  //   products.forEach((element) {
+  //     if (element['category'] == 'home-decoration')
+  //       home_decoration.add(element);
+  //   });
+  //   print(home_decoration.length);
+  // }
 }

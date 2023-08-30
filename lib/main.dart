@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:project/modules/Home_screen/home_screen.dart';
 import 'package:project/layout/home_layout.dart';
 import 'package:project/modules/details_screen/details.dart';
+import 'package:project/shared/remote/dio_helper.dart';
 
 void main() {
+  DioHelper.init();
   runApp(MyApp());
 }
 
@@ -13,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Details_screen());
+        debugShowCheckedModeBanner: false, home: Layout_screen());
   }
 }
