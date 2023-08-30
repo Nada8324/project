@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/modules/Home_screen/home_screen.dart';
 
@@ -37,20 +38,17 @@ class _Layout_screenState extends State<Layout_screen> {
         currentIndex: currentindex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined, color: HexColor('#8F959E')),
+              icon:
+              FaIcon(FontAwesomeIcons.house,color: HexColor('#8F959E')),
+              label: 'Cart'),
+          BottomNavigationBarItem(
+            icon:  FaIcon(FontAwesomeIcons.heart, color: HexColor('#8F959E')),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border, color: HexColor('#8F959E')),
+              icon: FaIcon(FontAwesomeIcons.bagShopping, color: HexColor('#8F959E')),
               label: 'Favorite'),
-          BottomNavigationBarItem(
-              icon:
-                  Icon(Icons.shopping_bag_outlined, color: HexColor('#8F959E')),
-              label: 'Cart'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined,
-                  color: HexColor('#8F959E')),
-              label: 'Account'),
+
         ],
         selectedFontSize: 13,
         backgroundColor: HexColor("#1D1E2014"),

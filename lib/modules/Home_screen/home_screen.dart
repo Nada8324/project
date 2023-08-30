@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Home_screen extends StatefulWidget {
@@ -19,29 +20,31 @@ class _Home_screenState extends State<Home_screen> {
       color: HexColor('#FEFEFE'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children:[
           Row(
             children: [
-              CircleAvatar(
-                child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.account_circle_outlined,
-                        color: Colors.grey[900])),
-                radius: 22.5,
-                backgroundColor: Colors.grey[200],
+              ElevatedButton(
+                onPressed: () {},
+                child:
+                FaIcon(FontAwesomeIcons.user,color: Colors.grey[900],),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(17),
+                  backgroundColor: Colors.grey[200],
+                ),
               ),
               Spacer(),
-              CircleAvatar(
-                child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.card_travel, color: Colors.grey[900])),
-                radius: 22.5,
-                backgroundColor: Colors.grey[200],
+              ElevatedButton(onPressed: (){}, child: FaIcon(FontAwesomeIcons.bagShopping,color: Colors.grey[900])  ,
+                style: ElevatedButton.styleFrom(shape: CircleBorder(),
+                  padding: EdgeInsets.all(17),
+                  backgroundColor: Colors.grey[200],
+                ),
+
               ),
             ],
           ),
           SizedBox(
-            height: 40,
+            height:5,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -49,6 +52,9 @@ class _Home_screenState extends State<Home_screen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height:35,
+                    ),
                     Text(
                       'HELLO',
                       style: TextStyle(
@@ -186,7 +192,7 @@ class _Home_screenState extends State<Home_screen> {
                     Container(
                       width: double.infinity,
                       child: ListView.separated(
-                        physics: NeverScrollableScrollPhysics(),
+                          physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemBuilder: (context, index) => buildd(),
@@ -209,7 +215,7 @@ class _Home_screenState extends State<Home_screen> {
       children: [
         Expanded(
           child: InkWell(
-            onTap: (){},
+            onTap: () {},
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -345,7 +351,7 @@ class _Home_screenState extends State<Home_screen> {
         ),
         Expanded(
           child: InkWell(
-            onTap: (){
+            onTap: () {
               print("hgfhh");
             },
             child: Column(
