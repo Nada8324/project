@@ -110,11 +110,11 @@ class Home_screen extends StatelessWidget {
               ],
             ),
             Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
+              child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  itemBuilder: (context,index) => productItemBuilder('assets/images/person_photo_1.png','Nike Sportswear Club Fleece','\$99'),
+                itemCount: 10,
                 padding: EdgeInsets.zero,
-                children: productItemBuilder('https://i.ebayimg.com/images/g/JKcAAOSwfnNhvhfQ/s-l1600.jpg','Nike Sportswear Club Fleece','\$99'),
-                mainAxisSpacing: 50,
               ),
             ),
           ],
@@ -128,16 +128,16 @@ class Home_screen extends StatelessWidget {
 
 
 
-  List<Widget> productItemBuilder (String image,String label,String price) => List.generate(10,(index) {
-    return Center(
-      child: Container(
+  Widget productItemBuilder (String image,String label,String price) => Column(
+    children: [
+      Container(
         height: 203 ,
         width: 160 ,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: HexColor('#F2F2F2')),
         child: Stack(
           alignment: Alignment.topRight,
           children: [
-            Image(image: NetworkImage(image),),
+            Image(image: AssetImage(image),fit: BoxFit.scaleDown,),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(child: SvgPicture.asset('assets/images/Heart.svg'),onTap: (){print('Like Tapped');},),
@@ -145,12 +145,20 @@ class Home_screen extends StatelessWidget {
           ],
         ) ,
       ),
-    );
-  });
+      const SizedBox(height: 5,),
+      Text(label, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 11, color: Colors.black)),
+      const SizedBox(height: 5,),
+      Text(price, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Colors.black)),
+    ],
+  );
+
+
 
   Widget categoryBuilder(String photo , String text) => InkWell(
+    onTap: (){print('Category Tapped');},
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
     child: Container(
-
       height: 55,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: HexColor('#F5F6FA')),
       child: Row(
@@ -166,14 +174,11 @@ class Home_screen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 17,horizontal: 10),
-            child: Text(text,style: TextStyle(fontWeight: FontWeight.w500 ,fontSize: 15),),
+            child: Text(text,style: const TextStyle(fontWeight: FontWeight.w500 ,fontSize: 15),),
           )
         ],
       ) ,
     ),
-    onTap: (){print('Category Tapped');},
-    highlightColor: Colors.transparent,
-    splashColor: Colors.transparent,
   );
 
 
@@ -181,6 +186,16 @@ class Home_screen extends StatelessWidget {
 
 
 
+/*Expanded(
+child: GridView.count(
+crossAxisCount: 2,
+padding: EdgeInsets.zero,
+children: productItemBuilder('https://i.ebayimg.com/images/g/JKcAAOSwfnNhvhfQ/s-l1600.jpg','Nike Sportswear Club Fleece','\$99'),
+mainAxisSpacing: 80,
+shrinkWrap: false,
+scrollDirection: Axis.vertical,
+),
+),*/
 
 
 

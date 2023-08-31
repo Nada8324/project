@@ -8,6 +8,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:project/layout/cubit/cubit.dart';
 import 'package:project/layout/cubit/states.dart';
 import 'package:project/modules/Home_screen/home_screen.dart';
+import 'package:project/modules/cart_screen/cart.dart';
+import 'package:project/modules/profile_screen/profile.dart';
+import 'package:project/shared/components/components.dart';
 
 class Layout_screen extends StatefulWidget {
   @override
@@ -51,13 +54,26 @@ class _Layout_screenState extends State<Layout_screen> {
           return Scaffold(
             backgroundColor: HexColor('#FEFEFE'),
             bottomNavigationBar: BottomNavigationBar(
+              selectedFontSize: 0,
+              unselectedFontSize:0 ,
               showSelectedLabels: false,
               showUnselectedLabels: false,
               type: BottomNavigationBarType.fixed,
               selectedItemColor: Colors.black,
               items: cubit.currentIndex == 0 ? HomeSelected : (cubit.currentIndex == 1 ? FavoriteSelected : others) ,
               onTap: (index){
-                cubit.changeIndex(index);
+                if(index == 0 || index == 1) {
+                  cubit.changeIndex(index);
+                }
+                else if(index ==2)
+                  {
+                    navigateTo(context, CartScreen());
+                  }
+                else
+                  {
+                    navigateTo(context, ProfileScreen());
+                  }
+
               },
               currentIndex: cubit.currentIndex,
             ),

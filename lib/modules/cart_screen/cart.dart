@@ -17,7 +17,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(top: 45),
         child: Column(
           children: [
             Row(
@@ -51,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 38,
             ),
             Container(
@@ -74,10 +74,10 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
-                    Container(
+                    SizedBox(
                       height: 100,
                       width: 137,
                       child: Column(
@@ -157,19 +157,22 @@ class _CartScreenState extends State<CartScreen> {
                         ],
                       ),
                     ),
-                    Spacer(),
-                    Container(
-                      height: 25,
-                      width: 25,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: HexColor('#DEDEDE')
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: SvgPicture.asset(
-                            'assets/images/Delete.svg'),
+                    const Spacer(),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: HexColor('#DEDEDE')
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: SvgPicture.asset(
+                              'assets/images/Delete.svg'),
 
+                        ),
                       ),
                     )
                   ],
