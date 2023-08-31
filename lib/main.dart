@@ -15,6 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+          fontFamily: "Inter",
+          primarySwatch: Colors.blue,
+        ),
         debugShowCheckedModeBanner: false, home: Layout_screen());
   }
 }
