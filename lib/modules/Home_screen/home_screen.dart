@@ -1,19 +1,192 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/shared/components/constants.dart';
 import 'package:project/shared/remote/dio_helper.dart';
 
-class Home_screen extends StatefulWidget {
+class Home_screen extends StatelessWidget {
   const Home_screen({super.key});
 
   @override
-  State<Home_screen> createState() => _Home_screenState();
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 60,left: 25 ,right: 25,),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  child: CircleAvatar(
+                    backgroundColor: HexColor('#F5F6FA'),
+                    radius: 25,
+                    child: SvgPicture.asset('assets/images/menu.svg')
+                  ),
+                  onTap: (){
+                    print('menu tapped');
+                  },
+                ),
+                const Spacer(),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  child: CircleAvatar(
+                      backgroundColor: HexColor('#F5F6FA'),
+                      radius: 25,
+                      child: SvgPicture.asset('assets/images/cart.svg',color: Colors.black,)
+                  ),
+                  onTap: (){
+                    print('cart tapped');
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 20,),
+            const Text('Hello',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 28),),
+            const SizedBox(height: 5,),
+            Text('Welcome to Laza.',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15,color: HexColor('#8F959E')),),
+            const SizedBox(height: 20,),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 55,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: HexColor('#F5F6FA'),
+                    ),
+                    child: TextFormField(
+                      style: TextStyle(fontSize: 15 ,fontWeight: FontWeight.w400,color: HexColor('#8F959E')),
+                      decoration: InputDecoration(
+                        prefixIcon: SvgPicture.asset('assets/images/Search.svg',height: 20,width:20 ,fit: BoxFit.scaleDown,),
+                        hintText: 'Search...',
+                        contentPadding:EdgeInsets.all(15),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10,),
+                Container(
+                  height: 55,
+                  width: 55,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: HexColor('4A4E69'),
+                  ),
+                  child: SvgPicture.asset('assets/images/Voice.svg',fit: BoxFit.scaleDown,),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20,),
+            Row(
+              children: [
+                Text('Choose Brand',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 17,color: Colors.black),),
+                const Spacer(),
+                TextButton(onPressed: (){print('View All Pressed');}, child: Text('View All',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 13,color: HexColor('#8F959E')),),),
+              ],
+            ),
+            const SizedBox(height: 15,),
+            SizedBox(height: 55,child: ListView.separated(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal ,
+                itemBuilder: (context ,index) =>
+                categoryBuilder('assets/images/Adidas.svg','Adidas'),
+                separatorBuilder: (context ,index) =>
+                const SizedBox(width: 10,),
+                itemCount: 10,
+              ),),
+            const SizedBox(height: 15,),
+            Row(
+              children: [
+                Text('New Arraival',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 17,color: Colors.black),),
+                const Spacer(),
+                TextButton(onPressed: (){print('View All Pressed');}, child: Text('View All',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 13,color: HexColor('#8F959E')),),),
+              ],
+            ),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                padding: EdgeInsets.zero,
+                children: productItemBuilder('https://i.ebayimg.com/images/g/JKcAAOSwfnNhvhfQ/s-l1600.jpg','Nike Sportswear Club Fleece','\$99'),
+                mainAxisSpacing: 50,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+
+
+
+  List<Widget> productItemBuilder (String image,String label,String price) => List.generate(10,(index) {
+    return Center(
+      child: Container(
+        height: 203 ,
+        width: 160 ,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: HexColor('#F2F2F2')),
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Image(image: NetworkImage(image),),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(child: SvgPicture.asset('assets/images/Heart.svg'),onTap: (){print('Like Tapped');},),
+            ),
+          ],
+        ) ,
+      ),
+    );
+  });
+
+  Widget categoryBuilder(String photo , String text) => InkWell(
+    child: Container(
+
+      height: 55,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: HexColor('#F5F6FA')),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 5,top: 5,bottom: 5),
+            child: Container(
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white),
+              child: SvgPicture.asset(photo,fit: BoxFit.scaleDown,),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 17,horizontal: 10),
+            child: Text(text,style: TextStyle(fontWeight: FontWeight.w500 ,fontSize: 15),),
+          )
+        ],
+      ) ,
+    ),
+    onTap: (){print('Category Tapped');},
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
+  );
+
+
 }
 
-class _Home_screenState extends State<Home_screen> {
-  @override
-  void initState() {
+
+
+
+
+
+
+/*  @override*/
+/*  void initState() {
     super.initState();
     getproducts();
 
@@ -540,55 +713,53 @@ class _Home_screenState extends State<Home_screen> {
       });
       categories = cat.toSet().toList();
     });
-  }
-
-  // List<dynamic> smartPhones = [];
-  // List<dynamic> laptops = [];
-  // List<dynamic> fragrances = [];
-  // List<dynamic> skinCare = [];
-  // List<dynamic> groceries = [];
-  // List<dynamic> home_decoration = [];
-  //
-  // void SmartPhones() {
-  //   products.forEach((element) {
-  //     if (element['category'] == 'smartphones') smartPhones.add(element);
-  //   });
-  //   print(smartPhones.length);
-  // }
-  //
-  // void Laptops() {
-  //   products.forEach((element) {
-  //     if (element['category'] == 'laptops') laptops.add(element);
-  //   });
-  //   print(laptops.length);
-  // }
-  //
-  // void Fragrances() {
-  //   products.forEach((element) {
-  //     if (element['category'] == 'fragrances') fragrances.add(element);
-  //   });
-  //   print(fragrances.length);
-  // }
-  //
-  // void SkinCare() {
-  //   products.forEach((element) {
-  //     if (element['category'] == 'skincare') skinCare.add(element);
-  //   });
-  //   print(skinCare.length);
-  // }
-  //
-  // void Groceries() {
-  //   products.forEach((element) {
-  //     if (element['category'] == 'groceries') groceries.add(element);
-  //   });
-  //   print(groceries.length);
-  // }
-  //
-  // void HomeDecoration() {
-  //   products.forEach((element) {
-  //     if (element['category'] == 'home-decoration')
-  //       home_decoration.add(element);
-  //   });
-  //   print(home_decoration.length);
-  // }
-}
+  }*/
+// List<dynamic> smartPhones = [];
+// List<dynamic> laptops = [];
+// List<dynamic> fragrances = [];
+// List<dynamic> skinCare = [];
+// List<dynamic> groceries = [];
+// List<dynamic> home_decoration = [];
+//
+// void SmartPhones() {
+//   products.forEach((element) {
+//     if (element['category'] == 'smartphones') smartPhones.add(element);
+//   });
+//   print(smartPhones.length);
+// }
+//
+// void Laptops() {
+//   products.forEach((element) {
+//     if (element['category'] == 'laptops') laptops.add(element);
+//   });
+//   print(laptops.length);
+// }
+//
+// void Fragrances() {
+//   products.forEach((element) {
+//     if (element['category'] == 'fragrances') fragrances.add(element);
+//   });
+//   print(fragrances.length);
+// }
+//
+// void SkinCare() {
+//   products.forEach((element) {
+//     if (element['category'] == 'skincare') skinCare.add(element);
+//   });
+//   print(skinCare.length);
+// }
+//
+// void Groceries() {
+//   products.forEach((element) {
+//     if (element['category'] == 'groceries') groceries.add(element);
+//   });
+//   print(groceries.length);
+// }
+//
+// void HomeDecoration() {
+//   products.forEach((element) {
+//     if (element['category'] == 'home-decoration')
+//       home_decoration.add(element);
+//   });
+//   print(home_decoration.length);
+// }

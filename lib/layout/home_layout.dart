@@ -17,6 +17,27 @@ class Layout_screen extends StatefulWidget {
 class _Layout_screenState extends State<Layout_screen> {
   @override
 
+  List<BottomNavigationBarItem> HomeSelected = [
+  const BottomNavigationBarItem(icon: Text('Home',style: TextStyle(fontSize: 11 ,fontWeight: FontWeight.w500),),label:''),
+  BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/favorites.svg'),label:''),
+  BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/cart.svg'),label:''),
+  BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/profile.svg'),label:''),
+  ];
+  List<BottomNavigationBarItem> FavoriteSelected = [
+    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/home.svg'),label:''),
+    const BottomNavigationBarItem(icon: Text('Favorites',style: TextStyle(fontSize: 11 ,fontWeight: FontWeight.w500),),label:''),
+    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/cart.svg'),label:''),
+    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/profile.svg'),label:''),
+  ];
+
+  List<BottomNavigationBarItem> others = [
+    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/home.svg'),label:''),
+    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/favorites.svg'),label:''),
+    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/cart.svg'),label:''),
+    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/profile.svg'),label:''),
+  ];
+
+
 
 
   Widget build(BuildContext context) {
@@ -30,12 +51,11 @@ class _Layout_screenState extends State<Layout_screen> {
           return Scaffold(
             backgroundColor: HexColor('#FEFEFE'),
             bottomNavigationBar: BottomNavigationBar(
-              items: [
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/home.svg'),label:''),
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/favorites.svg'),label:''),
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/cart.svg'),label:''),
-                BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/profile.svg'),label:''),
-              ],
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.black,
+              items: cubit.currentIndex == 0 ? HomeSelected : (cubit.currentIndex == 1 ? FavoriteSelected : others) ,
               onTap: (index){
                 cubit.changeIndex(index);
               },
