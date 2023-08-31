@@ -19,6 +19,6 @@ class MyApp extends StatelessWidget {
           fontFamily: "Inter",
           primarySwatch: Colors.blue,
         ),
-        debugShowCheckedModeBanner: false, home: Layout_screen());
+        debugShowCheckedModeBanner: false, home: DetailSscreen());
   }
 }
