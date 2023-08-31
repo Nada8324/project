@@ -8,33 +8,23 @@ import 'package:project/modules/profile_screen/profile.dart';
 
 import '../../modules/Home_screen/home_screen.dart';
 
-class ShopCubit extends Cubit<ShopStates>
-{
-  ShopCubit() :super(ShopInitialState());
-
+class ShopCubit extends Cubit<ShopStates> {
+  ShopCubit() : super(ShopInitialState());
 
   static ShopCubit get(context) => BlocProvider.of(context);
-
-
 
   int currentIndex = 0;
 
   List<Widget> screens = [
     //screens
     Home_screen(),
-    FavoriteScreen(),
+    Fav_Screen(),
     CartScreen(),
     ProfileScreen(),
   ];
 
-
-  void changeIndex(index)
-  {
+  void changeIndex(index) {
     currentIndex = index;
     emit(ShopBottomNavBarChangeState());
   }
-
-
-
-
 }
