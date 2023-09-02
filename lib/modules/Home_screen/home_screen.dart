@@ -151,9 +151,6 @@ class Home_screen extends StatelessWidget {
       Text(price, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Colors.black)),
     ],
   );
-
-
-
   Widget categoryBuilder(String photo , String text) => InkWell(
     onTap: (){print('Category Tapped');},
     highlightColor: Colors.transparent,
