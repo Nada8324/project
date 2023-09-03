@@ -215,7 +215,7 @@ class Home_screen extends StatelessWidget {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2),
                       itemBuilder: (context, index) {
-                        ProductModel? p = model!.data.products[index];
+                        ProductModel? p = model.data.products[index];
                         return productItemBuilder(
                             '${p.image}', '${p.name}', '${p.old_price}\$');
                       },
