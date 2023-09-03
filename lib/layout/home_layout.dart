@@ -11,6 +11,9 @@ import 'package:project/modules/Home_screen/home_screen.dart';
 import 'package:project/modules/cart_screen/cart.dart';
 import 'package:project/modules/profile_screen/profile.dart';
 import 'package:project/shared/components/components.dart';
+import 'package:provider/provider.dart';
+
+import '../shared/components/constants.dart';
 
 class Layout_screen extends StatefulWidget {
   @override
@@ -47,10 +50,11 @@ class _Layout_screenState extends State<Layout_screen> {
     return BlocProvider(
       create: (BuildContext context) => ShopCubit(),
       child: BlocConsumer<ShopCubit,ShopStates>(
-        listener: (context,state){} ,
+        listener: (context,state){},
         builder: (context,state)
         {
          var cubit = ShopCubit.get(context);
+         final themeProvider = Provider.of<ThemeProvider>(context);
           return Scaffold(
             backgroundColor: HexColor('#FEFEFE'),
             bottomNavigationBar: BottomNavigationBar(

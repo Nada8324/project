@@ -1,8 +1,11 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/data_provider/remote/firebasehelper.dart';
 import 'package:project/modules/signup_screen/signup.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../Home_screen/home_screen.dart';
 import '../forgetpassword/forget_password.dart';
@@ -180,21 +183,22 @@ class _LogInState extends State<LogIn> {
   
 
   void logInAction() {
-    if(formkey.currentState!.validate()){
-  showDialog(context: context, builder: (context){
-return const Center(child: CircularProgressIndicator(),);
-});
-FireBaseHelper().signIN(emailController.text.toString(), passwordController.text.toString()).then((value){
-  if(value is User){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Home_screen()));
-  }
-   else if (value is String)
+    if(formkey.currentState!.validate())
+    {
+      showDialog(context: context, builder: (context) =>const Center(child: CircularProgressIndicator(),));
+      FireBaseHelper().signIN(emailController.text.toString(), passwordController.text.toString()).then((value)
+      {
+        if(value is User)
+        {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Home_screen()));
+        }
+        else if (value is String)
             {
               Navigator.of(context).pop();
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
             }
-});
-}
-  
+      });
+    }
   }
 }
+

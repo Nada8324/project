@@ -48,96 +48,119 @@ class _Fav_ScreenState extends State<Fav_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Column(children: [
-            SizedBox(
-              height: 25,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.arrow_back),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            Column(children: [
+              SizedBox(
+                height: 45,
               ),
-              Text(
-                "My Favourits",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                child: CircleAvatar(
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  child: CircleAvatar(
                     backgroundColor: HexColor('#F5F6FA'),
                     radius: 25,
-                    child: SvgPicture.asset(
-                      'assets/images/cart.svg',
-                      color: Colors.black,
-                    )),
-                onTap: () {
-                  print('cart tapped');
-                },
+                    child: SvgPicture.asset('assets/images/Arrow - Left.svg'),
+                  ),
+                  onTap: () {
+                    print('cart tapped');
+                  },
+                ),
+                Text(
+                  "Favourite",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: HexColor('#1D1E20')),
+                ),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  child: CircleAvatar(
+                      backgroundColor: HexColor('#F5F6FA'),
+                      radius: 25,
+                      child: SvgPicture.asset(
+                        'assets/images/cart.svg',
+                        color: HexColor('#1D1E20'),
+                      )),
+                  onTap: () {
+                    print('cart tapped');
+                  },
+                ),
+              ]),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Items",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                            color: HexColor('#1D1E20')),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "in Favorite",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: HexColor('#8F959E'),
+                            fontSize: 15),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Container(
+                    height: 37,
+                    width: 68,
+                    decoration: BoxDecoration(
+                      color: HexColor('#F5F6FA'),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextButton.icon(
+                        onPressed: () {},
+                        icon: SvgPicture.asset('assets/images/Edit.svg'),
+                        label: Text(
+                          "Edit",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              color: HexColor('#1D1E20')),
+                        )),
+                  )
+                ],
               ),
             ]),
             SizedBox(
-              height: 30,
+              height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 15,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Items",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "in Favourits",
-                    )
-                  ],
-                ),
-                SizedBox(
-                  width: 200,
-                ),
-                TextButton.icon(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.edit,
-                      color: Colors.black,
-                    ),
-                    label: Text(
-                      "Edit",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 17,
-                          color: Colors.black),
-                    ))
-              ],
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) => productItemBuilder(
+                    'assets/images/person_photo_1.png',
+                    'Nike Sportswear Club Fleece',
+                    '\$99'),
+                itemCount: 10,
+                padding: EdgeInsets.zero,
+              ),
             ),
-          ]),
-          SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              itemBuilder: (context, index) => productItemBuilder(
-                  'assets/images/person_photo_1.png',
-                  'Nike Sportswear Club Fleece',
-                  '\$99'),
-              itemCount: 10,
-              padding: EdgeInsets.zero,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -145,29 +168,34 @@ class _Fav_ScreenState extends State<Fav_Screen> {
 
 Widget productItemBuilder(String image, String label, String price) => Column(
       children: [
-        Container(
-          height: 203,
-          width: 160,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: HexColor('#F2F2F2')),
-          child: Stack(
-            alignment: Alignment.topRight,
-            children: [
-              Image(
-                image: AssetImage(image),
-                fit: BoxFit.scaleDown,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  child: SvgPicture.asset('assets/images/Heart.svg'),
-                  onTap: () {
-                    print('Like Tapped');
-                  },
+        Expanded(
+          child: Container(
+            height: 203,
+            width: 160,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: HexColor('#F2F2F2')),
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Container(
+                  child: Image(
+                    image: AssetImage(image),
+                    fit: BoxFit.scaleDown,
+                  ),
+                  width: 165,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    child: SvgPicture.asset('assets/images/Heart.svg'),
+                    onTap: () {
+                      print('Like Tapped');
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(
