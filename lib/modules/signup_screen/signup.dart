@@ -10,64 +10,72 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor('#f6f1ed'),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 150,),
-           SvgPicture.asset('assets/images/illustration 1.svg'),
-            Text(
-              'Shop Now!',
-              style: TextStyle(fontSize: 30, color:  HexColor('#4A4E69')),
-            ),
-            SizedBox(height: 70,),
-            ElevatedButton(
-              
-              style: ElevatedButton.styleFrom(
-                backgroundColor:  HexColor('#4A4E69'),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                minimumSize: Size(200, 50),
-              ), 
-              
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUp()),
-                );
-              },
-              child: Text(
-                'Create account',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            SizedBox(height: 15,),
-            Row( 
-              children: [
-                SizedBox(width: 110,),
-                Text('Have an account? '),
-                GestureDetector(
-                  onTap: () {
-                  
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LogIn()),
-            );
-          },child: Text(
-            'Log in',
-            style: TextStyle(
-              fontSize: 18,
-
-              color: HexColor('#4A4E69'),
-
+      backgroundColor: HexColor('#FFFFFF'),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 96,
+          ),
+          Text(
+            'AliMama',
+            style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700, color:  HexColor('#4A4E69')),
+          ),
+          SizedBox(height: 28,),
+         Image(image: AssetImage('assets/images/illustration 1.png')),
+          SizedBox(
+            height: 22,
+          ),
+          Center(
+            child: Text(
+              'Get Your Stuffs Here !',
+              style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700, color:  HexColor('#090A0A')),
             ),
           ),
-                )
-              ],
-            )
-          ],
+          SizedBox(height: 37,),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:  HexColor('#4A4E69'),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              minimumSize: Size(200, 50),
+            ),
+
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUp()),
+              );
+            },
+            child: Text(
+              'Create account',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          SizedBox(height: 17,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Have an account?'),
+              GestureDetector(
+                onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LogIn()),
+          );
+        },child: Text(
+          'Log in',
+          style: TextStyle(
+            fontSize: 15,
+            color: HexColor('#4A4E69'),
+          ),
         ),
+              )
+            ],
+          )
+        ],
       ),
     );
   }

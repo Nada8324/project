@@ -6,14 +6,18 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:project/layout/cubit/states.dart';
 import 'package:project/layout/model/category_model.dart';
 import 'package:project/layout/model/product_modedl.dart';
+import 'package:project/modules/cart_screen/cart.dart';
 import 'package:project/shared/components/constants.dart';
 import 'package:project/shared/remote/dio_helper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
 import '../../layout/cubit/cubit.dart';
+import '../setting_screen/setting.dart';
 
 class Home_screen extends StatelessWidget {
-  const Home_screen({super.key});
+
+  final _formKey = GlobalKey<FormState>();
+  final search_text = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
@@ -38,7 +42,7 @@ class Home_screen extends StatelessWidget {
                         radius: 25,
                         child: SvgPicture.asset('assets/images/menu.svg')),
                     onTap: () {
-                      print('menu tapped');
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => TheSettingScreen(),));
                     },
                   ),
                   const Spacer(),
@@ -53,7 +57,7 @@ class Home_screen extends StatelessWidget {
                           color: Colors.black,
                         )),
                     onTap: () {
-                      print('cart tapped');
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
                     },
                   ),
                 ],
@@ -87,21 +91,34 @@ class Home_screen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         color: HexColor('#F5F6FA'),
                       ),
-                      child: TextFormField(
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: HexColor('#8F959E')),
-                        decoration: InputDecoration(
-                          prefixIcon: SvgPicture.asset(
-                            'assets/images/Search.svg',
-                            height: 20,
-                            width: 20,
-                            fit: BoxFit.scaleDown,
+                      child: Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          controller: search_text,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                          onFieldSubmitted: (value) {
+                            print(search_text.text);
+                          },
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: HexColor('#8F959E')),
+                          decoration: InputDecoration(
+                            prefixIcon: SvgPicture.asset(
+                              'assets/images/Search.svg',
+                              height: 20,
+                              width: 20,
+                              fit: BoxFit.scaleDown,
+                            ),
+                            hintText: 'Search...',
+                            contentPadding: EdgeInsets.all(15),
+                            border: InputBorder.none,
                           ),
-                          hintText: 'Search...',
-                          contentPadding: EdgeInsets.all(15),
-                          border: InputBorder.none,
                         ),
                       ),
                     ),
@@ -109,16 +126,23 @@ class Home_screen extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Container(
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: HexColor('4A4E69'),
-                    ),
-                    child: SvgPicture.asset(
-                      'assets/images/Voice.svg',
-                      fit: BoxFit.scaleDown,
+                  InkWell(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        // show in data grid this item
+                      }
+                    },
+                    child: Container(
+                      height: 55,
+                      width: 55,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: HexColor('4A4E69'),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/images/Search.svg',color: Colors.white,
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                   ),
                 ],

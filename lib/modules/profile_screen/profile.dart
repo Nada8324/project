@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:project/modules/favorite_screen/fav.dart';
 //import 'package:profile/constant.dart';
 //import 'package:profile/login.dart';
 //import 'package:profile/settind.dart';
@@ -36,17 +39,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: AssetImage('assets/images/person_photo_1.png'),
+                        radius: 22.5,
+                        backgroundImage: AssetImage('assets/images/profile_pic.jpg'),
                       ),
                     ),
-                    Text(
-                      'Gousif',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: themeProvider.textcolor,
-                          fontWeight: FontWeight.bold),
-                      maxLines: 2,
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Gousif',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: themeProvider.textcolor,
+                              fontWeight: FontWeight.w700),
+                          maxLines: 2,
+                        ),
+                        Row(
+                          children: [
+                            Text('Verified Profile',style:TextStyle(
+                              color: HexColor('#8F959E'),
+                              fontSize: 15,fontWeight: FontWeight.w400
+                            ),),
+                            SizedBox(width: 5,),
+                            Container(
+                              height: 15,
+                              width: 15,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                  children: [
+                                  SvgPicture.asset('assets/images/Star 6.svg'),
+                                    SvgPicture.asset('assets/images/check.svg'),
+                                  ],
+                        ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
                     Spacer(),
                     IconButton(
@@ -59,96 +93,98 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         )),
                   ],
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 80,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              color: Colors.grey,
-                            ),
-                            bottom: BorderSide(
-                              color: Colors.grey,
-                            ),
-                            right: BorderSide(
-                              color: Colors.grey,
-                            ),
-                            left: BorderSide(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Wallet',
-                                  style: TextStyle(
-                                      color: themeProvider.textcolor,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  '500 LE',
-                                  style: TextStyle(
-                                      color: themeProvider.buttonscolor,
-                                      fontSize: 20),
-                                ),
-                              ],
-                            ),
-                            VerticalDivider(
-                              thickness: 1,
-                              color: Colors.grey,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Spent',
-                                  style: TextStyle(
-                                      color: themeProvider.textcolor,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  '500 LE',
-                                  style: TextStyle(
-                                      color: themeProvider.buttonscolor,
-                                      fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                  ],
-                ),
+                // SizedBox(
+                //   height: 20.0,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     // Expanded(
+                //     //   child: Container(
+                //     //     height: 80,
+                //     //     decoration: BoxDecoration(
+                //     //       border: Border(
+                //     //         top: BorderSide(
+                //     //           color: Colors.grey,
+                //     //         ),
+                //     //         bottom: BorderSide(
+                //     //           color: Colors.grey,
+                //     //         ),
+                //     //         right: BorderSide(
+                //     //           color: Colors.grey,
+                //     //         ),
+                //     //         left: BorderSide(
+                //     //           color: Colors.grey,
+                //     //         ),
+                //     //       ),
+                //     //     ),
+                //     //     child: Row(
+                //     //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //     //       children: [
+                //     //         Column(
+                //     //           mainAxisAlignment: MainAxisAlignment.center,
+                //     //           children: [
+                //     //             Text(
+                //     //               'Wallet',
+                //     //               style: TextStyle(
+                //     //                   color: themeProvider.textcolor,
+                //     //                   fontSize: 20.0,
+                //     //                   fontWeight: FontWeight.w500),
+                //     //             ),
+                //     //             SizedBox(
+                //     //               height: 20,
+                //     //             ),
+                //     //             Text(
+                //     //               '500 LE',
+                //     //               style: TextStyle(
+                //     //                   color: themeProvider.buttonscolor,
+                //     //                   fontSize: 20),
+                //     //             ),
+                //     //           ],
+                //     //         ),
+                //     //         VerticalDivider(
+                //     //           thickness: 1,
+                //     //           color: Colors.grey,
+                //     //         ),
+                //     //         Column(
+                //     //           mainAxisAlignment: MainAxisAlignment.center,
+                //     //           children: [
+                //     //             Text(
+                //     //               'Spent',
+                //     //               style: TextStyle(
+                //     //                   color: themeProvider.textcolor,
+                //     //                   fontSize: 20.0,
+                //     //                   fontWeight: FontWeight.w500),
+                //     //             ),
+                //     //             SizedBox(
+                //     //               height: 20,
+                //     //             ),
+                //     //             Text(
+                //     //               '500 LE',
+                //     //               style: TextStyle(
+                //     //                   color: themeProvider.buttonscolor,
+                //     //                   fontSize: 20),
+                //     //             ),
+                //     //           ],
+                //     //         ),
+                //     //       ],
+                //     //     ),
+                //     //   ),
+                //     // ),
+                //     SizedBox(
+                //       width: 10.0,
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: 30.0,
                 ),
                 profileitem(
                   icon: Icon(Icons.favorite),
                   text: 'Your Favorite',
-                  onthepresed: () {},
+                  onthepresed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Fav_Screen(),));
+                  },
                 ),
                 profileitem(
                   icon: Icon(Icons.payment_outlined),

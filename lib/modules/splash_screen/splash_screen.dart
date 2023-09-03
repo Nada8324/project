@@ -14,17 +14,33 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
- 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(splash: Column(
-      children: [
-        
-       Text('Shopzen',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 50,color: HexColor('#4A4E69')),),
-         SvgPicture.asset('assets/images/shopping 1.svg',width: 100,height: 100,)
-      ],
-    ),
-    backgroundColor: HexColor('#f6f1ed')
-    , nextScreen: FirstPage(),splashIconSize: 500,duration: 3500,);
+    return AnimatedSplashScreen(
+      splash: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'AliMama',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 34,
+                color: HexColor('#4A4E69')),
+          ),
+          Container(
+            width: double.infinity,
+            height: 369,
+            child: Image(image: AssetImage('assets/images/shopping 1.png'),
+            ),
+          )
+        ],
+      ),
+      backgroundColor: HexColor('#FEFEFE'),
+      nextScreen: FirstPage(),
+      splashIconSize: 500,
+      duration: 3500,
+    );
   }
 }

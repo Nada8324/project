@@ -24,6 +24,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:project/layout/home_layout.dart';
+import 'package:project/modules/splash_screen/splash_screen.dart';
 
 import 'package:project/shared/components/constants.dart';
 import 'package:project/shared/remote/dio_helper.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
-      home: Layout_screen(),
+      home:SplashScreen(),
     );
   }
 }

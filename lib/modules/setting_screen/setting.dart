@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:hexcolor/hexcolor.dart';
 //import 'package:profile/components/button.dart';
 import 'package:provider/provider.dart';
 
@@ -31,18 +33,22 @@ class _SettingScreenState extends State<TheSettingScreen> {
                 Row(
                   children: [
                     CircleAvatar(
-                      radius: 25.0,
-                      backgroundImage: AssetImage('assets/images/person_photo_1.png'),
+                      radius: 22.5,
+                      backgroundImage: AssetImage('assets/images/profile_pic.jpg'),
                     ),
                     Spacer(),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: themeProvider.buttonscolor,
-                        )),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: CircleAvatar(
+                        backgroundColor: HexColor('#F5F6FA'),
+                        radius: 25,
+                        child: SvgPicture.asset('assets/images/Arrow - Left.svg'),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(
