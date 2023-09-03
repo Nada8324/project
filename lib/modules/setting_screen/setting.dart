@@ -179,13 +179,7 @@ class _SettingScreenState extends State<TheSettingScreen> {
                     ),
                   ],
                 ),
-                profileitem(
-                  icon: Icon(Icons.brightness_4_outlined),
-                  text: themeProvider.text,
-                  onthepresed: () {
-                    themeProvider.toggleTheme();
-                  },
-                ),
+
                 Row(
                   children: [
                     Text(

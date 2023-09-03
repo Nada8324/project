@@ -180,7 +180,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onthepresed: () {
                     // TODO firebasehelper.signout
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                        MaterialPageRoute(builder: (context) => LogIn()));
                   },
                 ),
               ],

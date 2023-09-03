@@ -36,6 +36,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project/modules/cart_screen/cart.dart';
 
 class Fav_Screen extends StatefulWidget {
   const Fav_Screen({super.key});
@@ -66,7 +67,7 @@ class _Fav_ScreenState extends State<Fav_Screen> {
                     child: SvgPicture.asset('assets/images/Arrow - Left.svg'),
                   ),
                   onTap: () {
-                    print('cart tapped');
+                    Navigator.pop(context);
                   },
                 ),
                 Text(
@@ -87,7 +88,7 @@ class _Fav_ScreenState extends State<Fav_Screen> {
                         color: HexColor('#1D1E20'),
                       )),
                   onTap: () {
-                    print('cart tapped');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
                   },
                 ),
               ]),
@@ -165,7 +166,6 @@ class _Fav_ScreenState extends State<Fav_Screen> {
     );
   }
 }
-
 Widget productItemBuilder(String image, String label, String price) => Column(
       children: [
         Expanded(
