@@ -120,7 +120,7 @@ class _LogInState extends State<LogIn> {
                                return Forgetpassword();
                                 }));
                               },
-                              child: Text('Forget password?',style: TextStyle(fontWeight: FontWeight.bold),)),
+                              child: Text('Forget password?',style: TextStyle(fontWeight: FontWeight.w400,fontSize:15 ,color: HexColor('#525CB5CC')),)),
                           ],
                         ),
                       ),
@@ -136,8 +136,7 @@ class _LogInState extends State<LogIn> {
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(width: width/1.89
-                        ,),
+                        Spacer(),
                         Switch(activeColor: HexColor('#4A4E69'),   value: isSwitched, onChanged: (value){
                        setState(() {
                             isSwitched=value;
