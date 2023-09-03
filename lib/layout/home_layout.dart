@@ -22,68 +22,82 @@ class Layout_screen extends StatefulWidget {
 
 class _Layout_screenState extends State<Layout_screen> {
   @override
-
   List<BottomNavigationBarItem> HomeSelected = [
-  const BottomNavigationBarItem(icon: Text('Home',style: TextStyle(fontSize: 11 ,fontWeight: FontWeight.w500),),label:''),
-  BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/favorites.svg'),label:''),
-  BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/cart.svg'),label:''),
-  BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/profile.svg'),label:''),
+    const BottomNavigationBarItem(
+        icon: Text(
+          'Home',
+          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+        ),
+        label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/favorites.svg'), label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/cart.svg'), label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/profile.svg'), label: ''),
   ];
   List<BottomNavigationBarItem> FavoriteSelected = [
-    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/home.svg'),label:''),
-    const BottomNavigationBarItem(icon: Text('Favorites',style: TextStyle(fontSize: 11 ,fontWeight: FontWeight.w500),),label:''),
-    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/cart.svg'),label:''),
-    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/profile.svg'),label:''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/home.svg'), label: ''),
+    const BottomNavigationBarItem(
+        icon: Text(
+          'Favorites',
+          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
+        ),
+        label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/cart.svg'), label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/profile.svg'), label: ''),
   ];
 
   List<BottomNavigationBarItem> others = [
-    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/home.svg'),label:''),
-    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/favorites.svg'),label:''),
-    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/cart.svg'),label:''),
-    BottomNavigationBarItem(icon: SvgPicture.asset('assets/images/profile.svg'),label:''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/home.svg'), label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/favorites.svg'), label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/cart.svg'), label: ''),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset('assets/images/profile.svg'), label: ''),
   ];
-
-
-
 
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => ShopCubit(),
-      child: BlocConsumer<ShopCubit,ShopStates>(
-        listener: (context,state){},
-        builder: (context,state)
-        {
-         var cubit = ShopCubit.get(context);
-         final themeProvider = Provider.of<ThemeProvider>(context);
+      create: (BuildContext context) => ShopCubit()
+        ..getHomeData()
+        ..getCategory(),
+      child: BlocConsumer<ShopCubit, ShopStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = ShopCubit.get(context);
+          final themeProvider = Provider.of<ThemeProvider>(context);
           return Scaffold(
             backgroundColor: HexColor('#FEFEFE'),
             bottomNavigationBar: BottomNavigationBar(
               selectedFontSize: 0,
-              unselectedFontSize:0 ,
+              unselectedFontSize: 0,
               showSelectedLabels: false,
               showUnselectedLabels: false,
               type: BottomNavigationBarType.fixed,
               selectedItemColor: Colors.black,
-              items: cubit.currentIndex == 0 ? HomeSelected : (cubit.currentIndex == 1 ? FavoriteSelected : others) ,
-              onTap: (index){
-                if(index == 0 || index == 1) {
+              items: cubit.currentIndex == 0
+                  ? HomeSelected
+                  : (cubit.currentIndex == 1 ? FavoriteSelected : others),
+              onTap: (index) {
+                if (index == 0 || index == 1) {
                   cubit.changeIndex(index);
+                } else if (index == 2) {
+                  navigateTo(context, CartScreen());
+                } else {
+                  navigateTo(context, ProfileScreen());
                 }
-                else if(index ==2)
-                  {
-                    navigateTo(context, CartScreen());
-                  }
-                else
-                  {
-                    navigateTo(context, ProfileScreen());
-                  }
-
               },
               currentIndex: cubit.currentIndex,
             ),
             body: cubit.screens[cubit.currentIndex],
           );
-        } ,
+        },
       ),
     );
   }

@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+
 List<dynamic> products = [];
+
 class ThemeProvider with ChangeNotifier {
   // String font_family ="Inter";
   bool _isDarkTheme = false;
@@ -32,4 +33,3 @@ final lightTheme = ThemeData(
 final darkTheme = ThemeData(
   brightness: Brightness.dark,
 );
-
