@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:project/modules/order_confirm/confirm.dart';
+import 'package:provider/provider.dart';
+
+import '../../shared/components/constants.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -16,6 +19,7 @@ class _CartScreenState extends State<CartScreen> {
   bool check_address=true;
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 45, right: 20, left: 20,bottom: 20),
@@ -272,14 +276,14 @@ class _CartScreenState extends State<CartScreen> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 15,
-                                    color: HexColor('#1D1E20')),
+                                    color: themeProvider.textcolor),
                                 overflow: TextOverflow.ellipsis),
                             SizedBox(
                               height: 10,
                             ),
                             Text('Sylhet',
                                 style: TextStyle(
-                                    color: HexColor('#8F959E'),
+                                    color: themeProvider.textcolor,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400))
                           ],
