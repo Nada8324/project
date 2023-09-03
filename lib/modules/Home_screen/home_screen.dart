@@ -1,204 +1,234 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project/layout/cubit/states.dart';
+import 'package:project/layout/model/category_model.dart';
+import 'package:project/layout/model/product_modedl.dart';
 import 'package:project/shared/components/constants.dart';
 import 'package:project/shared/remote/dio_helper.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+
+import '../../layout/cubit/cubit.dart';
 
 class Home_screen extends StatelessWidget {
   const Home_screen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(
-          top: 60,
-          left: 25,
-          right: 25,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  child: CircleAvatar(
-                      backgroundColor: HexColor('#F5F6FA'),
-                      radius: 25,
-                      child: SvgPicture.asset('assets/images/menu.svg')),
-                  onTap: () {
-                    print('menu tapped');
-                  },
-                ),
-                const Spacer(),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  child: CircleAvatar(
-                      backgroundColor: HexColor('#F5F6FA'),
-                      radius: 25,
-                      child: SvgPicture.asset(
-                        'assets/images/cart.svg',
-                        color: Colors.black,
-                      )),
-                  onTap: () {
-                    print('cart tapped');
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'Hello',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              'Welcome to AliMama.',
-              style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 15,
-                  color: HexColor('#8F959E')),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 55,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: HexColor('#F5F6FA'),
-                    ),
-                    child: TextFormField(
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: HexColor('#8F959E')),
-                      decoration: InputDecoration(
-                        prefixIcon: SvgPicture.asset(
-                          'assets/images/Search.svg',
-                          height: 20,
-                          width: 20,
-                          fit: BoxFit.scaleDown,
+    return BlocConsumer<ShopCubit, ShopStates>(
+      listener: (context, state) {},
+      builder: (context, state) => Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.only(
+            top: 60,
+            left: 25,
+            right: 25,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    child: CircleAvatar(
+                        backgroundColor: HexColor('#F5F6FA'),
+                        radius: 25,
+                        child: SvgPicture.asset('assets/images/menu.svg')),
+                    onTap: () {
+                      print('menu tapped');
+                    },
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    child: CircleAvatar(
+                        backgroundColor: HexColor('#F5F6FA'),
+                        radius: 25,
+                        child: SvgPicture.asset(
+                          'assets/images/cart.svg',
+                          color: Colors.black,
+                        )),
+                    onTap: () {
+                      print('cart tapped');
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Hello',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Welcome to AliMama.',
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
+                    color: HexColor('#8F959E')),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 55,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: HexColor('#F5F6FA'),
+                      ),
+                      child: TextFormField(
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: HexColor('#8F959E')),
+                        decoration: InputDecoration(
+                          prefixIcon: SvgPicture.asset(
+                            'assets/images/Search.svg',
+                            height: 20,
+                            width: 20,
+                            fit: BoxFit.scaleDown,
+                          ),
+                          hintText: 'Search...',
+                          contentPadding: EdgeInsets.all(15),
+                          border: InputBorder.none,
                         ),
-                        hintText: 'Search...',
-                        contentPadding: EdgeInsets.all(15),
-                        border: InputBorder.none,
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 55,
-                  width: 55,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: HexColor('4A4E69'),
+                  SizedBox(
+                    width: 10,
                   ),
-                  child: SvgPicture.asset(
-                    'assets/images/Voice.svg',
-                    fit: BoxFit.scaleDown,
+                  Container(
+                    height: 55,
+                    width: 55,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: HexColor('4A4E69'),
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/images/Voice.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Choose Brand',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 17,
-                      color: Colors.black),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    print('View All Pressed');
-                  },
-                  child: Text(
-                    'View All',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        color: HexColor('#8F959E')),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              height: 55,
-              child: ListView.separated(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) =>
-                    categoryBuilder('assets/images/Adidas.svg', 'Adidas'),
-                separatorBuilder: (context, index) => const SizedBox(
-                  width: 10,
-                ),
-                itemCount: 10,
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                Text(
-                  'New Arraival',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 17,
-                      color: Colors.black),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    print('View All Pressed');
-                  },
-                  child: Text(
-                    'View All',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        color: HexColor('#8F959E')),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: GridView.builder(
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) => productItemBuilder(
-                    'assets/images/person_photo_1.png',
-                    'Nike Sportswear Club Fleece',
-                    '\$99'),
-                itemCount: 10,
-                padding: EdgeInsets.zero,
+              const SizedBox(
+                height: 20,
               ),
-            ),
-          ],
+              Row(
+                children: [
+                  Text(
+                    'Choose Category',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17,
+                        color: Colors.black),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      print('View All Pressed');
+                    },
+                    child: Text(
+                      'View All',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          color: HexColor('#8F959E')),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              SizedBox(
+                height: 55,
+                child: ConditionalBuilder(
+                  condition: ShopCubit.get(context).cat?.data.category != null,
+                  builder: (context) {
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        var model = ShopCubit.get(context).cat;
+                        CategoryModel? c = model!.data.category[index];
+                        return categoryBuilder('${c.image}', '${c.name}');
+                      },
+                      separatorBuilder: (context, index) => const SizedBox(
+                        width: 10,
+                      ),
+                      itemCount:
+                          ShopCubit.get(context).cat!.data.category.length,
+                    );
+                  },
+                  fallback: (context) =>
+                      Center(child: CircularProgressIndicator()),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'New Arraival',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17,
+                        color: Colors.black),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      print('View All Pressed');
+                    },
+                    child: Text(
+                      'View All',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          color: HexColor('#8F959E')),
+                    ),
+                  ),
+                ],
+              ),
+              ConditionalBuilder(
+                condition:
+                    ShopCubit.get(context).product?.data.products != null,
+                builder: (context) {
+                  var model = ShopCubit.get(context).product;
+                  return Expanded(
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2),
+                      itemBuilder: (context, index) {
+                        ProductModel? p = model!.data.products[index];
+                        return productItemBuilder(
+                            '${p.image}', '${p.name}', '${p.old_price}\$');
+                      },
+                      itemCount: model!.data.products.length,
+                      padding: EdgeInsets.zero,
+                    ),
+                  );
+                },
+                fallback: (context) =>
+                    Center(child: CircularProgressIndicator()),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -218,9 +248,8 @@ class Home_screen extends StatelessWidget {
                 children: [
                   Container(
                     child: Image(
-                      image: AssetImage(image),
+                      image: NetworkImage(image),
                       fit: BoxFit.scaleDown,
-                      alignment: Alignment.center,
                     ),
                     width: 165,
                   ),
@@ -244,6 +273,8 @@ class Home_screen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(label,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 11,
@@ -281,10 +312,7 @@ class Home_screen extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white),
-                  child: SvgPicture.asset(
-                    photo,
-                    fit: BoxFit.scaleDown,
-                  ),
+                  child: Image(image: NetworkImage(photo)),
                 ),
               ),
               Padding(
@@ -301,17 +329,6 @@ class Home_screen extends StatelessWidget {
         ),
       );
 }
-
-/*Expanded(
-child: GridView.count(
-crossAxisCount: 2,
-padding: EdgeInsets.zero,
-children: productItemBuilder('https://i.ebayimg.com/images/g/JKcAAOSwfnNhvhfQ/s-l1600.jpg','Nike Sportswear Club Fleece','\$99'),
-mainAxisSpacing: 80,
-shrinkWrap: false,
-scrollDirection: Axis.vertical,
-),
-),*/
 
 /*  @override*/
 /*  void initState() {

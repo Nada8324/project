@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+
 List<dynamic> products = [];
+
 class ThemeProvider with ChangeNotifier {
   bool _isDarkTheme = false;
   Color textcolor = Colors.black;
@@ -30,4 +31,3 @@ final lightTheme = ThemeData(
 final darkTheme = ThemeData(
   brightness: Brightness.dark,
 );
-

@@ -6,7 +6,7 @@
 // import 'package:project/shared/remote/dio_helper.dart';
 //
 // void main() {
-//   DioHelper.init();
+//
 //   runApp(MyApp());
 // }
 //
@@ -26,12 +26,14 @@ import 'package:flutter/material.dart';
 import 'package:project/layout/home_layout.dart';
 
 import 'package:project/shared/components/constants.dart';
+import 'package:project/shared/remote/dio_helper.dart';
 
 import 'package:provider/provider.dart';
 
 import 'modules/profile_screen/profile.dart';
 
 void main() {
+  DioHelper.init();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
