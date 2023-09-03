@@ -10,10 +10,13 @@ class Home_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 60,left: 25 ,right: 25,),
+        padding: const EdgeInsets.only(
+          top: 60,
+          left: 25,
+          right: 25,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -23,11 +26,10 @@ class Home_screen extends StatelessWidget {
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   child: CircleAvatar(
-                    backgroundColor: HexColor('#F5F6FA'),
-                    radius: 25,
-                    child: SvgPicture.asset('assets/images/menu.svg')
-                  ),
-                  onTap: (){
+                      backgroundColor: HexColor('#F5F6FA'),
+                      radius: 25,
+                      child: SvgPicture.asset('assets/images/menu.svg')),
+                  onTap: () {
                     print('menu tapped');
                   },
                 ),
@@ -38,19 +40,36 @@ class Home_screen extends StatelessWidget {
                   child: CircleAvatar(
                       backgroundColor: HexColor('#F5F6FA'),
                       radius: 25,
-                      child: SvgPicture.asset('assets/images/cart.svg',color: Colors.black,)
-                  ),
-                  onTap: (){
+                      child: SvgPicture.asset(
+                        'assets/images/cart.svg',
+                        color: Colors.black,
+                      )),
+                  onTap: () {
                     print('cart tapped');
                   },
                 ),
               ],
             ),
-            const SizedBox(height: 20,),
-            const Text('Hello',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 28),),
-            const SizedBox(height: 5,),
-            Text('Welcome to Laza.',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 15,color: HexColor('#8F959E')),),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'Hello',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
+              'Welcome to AliMama.',
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15,
+                  color: HexColor('#8F959E')),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 Expanded(
@@ -61,17 +80,27 @@ class Home_screen extends StatelessWidget {
                       color: HexColor('#F5F6FA'),
                     ),
                     child: TextFormField(
-                      style: TextStyle(fontSize: 15 ,fontWeight: FontWeight.w400,color: HexColor('#8F959E')),
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: HexColor('#8F959E')),
                       decoration: InputDecoration(
-                        prefixIcon: SvgPicture.asset('assets/images/Search.svg',height: 20,width:20 ,fit: BoxFit.scaleDown,),
+                        prefixIcon: SvgPicture.asset(
+                          'assets/images/Search.svg',
+                          height: 20,
+                          width: 20,
+                          fit: BoxFit.scaleDown,
+                        ),
                         hintText: 'Search...',
-                        contentPadding:EdgeInsets.all(15),
+                        contentPadding: EdgeInsets.all(15),
                         border: InputBorder.none,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 Container(
                   height: 55,
                   width: 55,
@@ -79,40 +108,92 @@ class Home_screen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: HexColor('4A4E69'),
                   ),
-                  child: SvgPicture.asset('assets/images/Voice.svg',fit: BoxFit.scaleDown,),
+                  child: SvgPicture.asset(
+                    'assets/images/Voice.svg',
+                    fit: BoxFit.scaleDown,
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
-                Text('Choose Brand',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 17,color: Colors.black),),
+                Text(
+                  'Choose Brand',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 17,
+                      color: Colors.black),
+                ),
                 const Spacer(),
-                TextButton(onPressed: (){print('View All Pressed');}, child: Text('View All',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 13,color: HexColor('#8F959E')),),),
+                TextButton(
+                  onPressed: () {
+                    print('View All Pressed');
+                  },
+                  child: Text(
+                    'View All',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13,
+                        color: HexColor('#8F959E')),
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 15,),
-            SizedBox(height: 55,child: ListView.separated(
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 55,
+              child: ListView.separated(
                 shrinkWrap: true,
-                scrollDirection: Axis.horizontal ,
-                itemBuilder: (context ,index) =>
-                categoryBuilder('assets/images/Adidas.svg','Adidas'),
-                separatorBuilder: (context ,index) =>
-                const SizedBox(width: 10,),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) =>
+                    categoryBuilder('assets/images/Adidas.svg', 'Adidas'),
+                separatorBuilder: (context, index) => const SizedBox(
+                  width: 10,
+                ),
                 itemCount: 10,
-              ),),
-            const SizedBox(height: 15,),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
             Row(
               children: [
-                Text('New Arraival',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 17,color: Colors.black),),
+                Text(
+                  'New Arraival',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 17,
+                      color: Colors.black),
+                ),
                 const Spacer(),
-                TextButton(onPressed: (){print('View All Pressed');}, child: Text('View All',style: TextStyle(fontWeight: FontWeight.w400,fontSize: 13,color: HexColor('#8F959E')),),),
+                TextButton(
+                  onPressed: () {
+                    print('View All Pressed');
+                  },
+                  child: Text(
+                    'View All',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13,
+                        color: HexColor('#8F959E')),
+                  ),
+                ),
               ],
             ),
             Expanded(
               child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemBuilder: (context,index) => productItemBuilder('assets/images/person_photo_1.png','Nike Sportswear Club Fleece','\$99'),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) => productItemBuilder(
+                    'assets/images/person_photo_1.png',
+                    'Nike Sportswear Club Fleece',
+                    '\$99'),
                 itemCount: 10,
                 padding: EdgeInsets.zero,
               ),
@@ -123,65 +204,103 @@ class Home_screen extends StatelessWidget {
     );
   }
 
-
-
-
-
-
-  Widget productItemBuilder (String image,String label,String price) => Column(
-    children: [
-      Container(
-        height: 203 ,
-        width: 160 ,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: HexColor('#F2F2F2')),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            Image(image: AssetImage(image),fit: BoxFit.scaleDown,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(child: SvgPicture.asset('assets/images/Heart.svg'),onTap: (){print('Like Tapped');},),
-            ),
-          ],
-        ) ,
-      ),
-      const SizedBox(height: 5,),
-      Text(label, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 11, color: Colors.black)),
-      const SizedBox(height: 5,),
-      Text(price, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Colors.black)),
-    ],
-  );
-  Widget categoryBuilder(String photo , String text) => InkWell(
-    onTap: (){print('Category Tapped');},
-    highlightColor: Colors.transparent,
-    splashColor: Colors.transparent,
-    child: Container(
-      height: 55,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: HexColor('#F5F6FA')),
-      child: Row(
+  Widget productItemBuilder(String image, String label, String price) => Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 5,top: 5,bottom: 5),
+          Expanded(
             child: Container(
-              height: 45,
-              width: 45,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white),
-              child: SvgPicture.asset(photo,fit: BoxFit.scaleDown,),
+              height: 203,
+              width: 165,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: HexColor('#F2F2F2')),
+              child: Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  Container(
+                    child: Image(
+                      image: AssetImage(image),
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.center,
+                    ),
+                    width: 165,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      child: SvgPicture.asset('assets/images/Heart.svg'),
+                      onTap: () {
+                        print('Like Tapped');
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 17,horizontal: 10),
-            child: Text(text,style: const TextStyle(fontWeight: FontWeight.w500 ,fontSize: 15),),
-          )
+          const SizedBox(
+            height: 5,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 11,
+                      color: Colors.black)),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(price,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                      color: Colors.black)),
+            ],
+          ),
         ],
-      ) ,
-    ),
-  );
-
-
+      );
+  Widget categoryBuilder(String photo, String text) => InkWell(
+        onTap: () {
+          print('Category Tapped');
+        },
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        child: Container(
+          height: 55,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: HexColor('#F5F6FA')),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 5, top: 5, bottom: 5),
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white),
+                  child: SvgPicture.asset(
+                    photo,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 17, horizontal: 10),
+                child: Text(
+                  text,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500, fontSize: 15),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
 }
-
-
 
 /*Expanded(
 child: GridView.count(
@@ -193,9 +312,6 @@ shrinkWrap: false,
 scrollDirection: Axis.vertical,
 ),
 ),*/
-
-
-
 
 /*  @override*/
 /*  void initState() {

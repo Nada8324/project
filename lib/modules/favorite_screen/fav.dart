@@ -56,24 +56,25 @@ class _Fav_ScreenState extends State<Fav_Screen> {
               SizedBox(
                 height: 45,
               ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   child: CircleAvatar(
-                      backgroundColor: HexColor('#F5F6FA'),
-                      radius: 25,
-                      child: SvgPicture.asset(
-                        'assets/images/Arrow - Left.svg'),
-                      ),
+                    backgroundColor: HexColor('#F5F6FA'),
+                    radius: 25,
+                    child: SvgPicture.asset('assets/images/Arrow - Left.svg'),
+                  ),
                   onTap: () {
                     print('cart tapped');
                   },
                 ),
                 Text(
                   "Favourite",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600,color: HexColor('#1D1E20')),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: HexColor('#1D1E20')),
                 ),
                 InkWell(
                   splashColor: Colors.transparent,
@@ -82,7 +83,8 @@ class _Fav_ScreenState extends State<Fav_Screen> {
                       backgroundColor: HexColor('#F5F6FA'),
                       radius: 25,
                       child: SvgPicture.asset(
-                        'assets/images/cart.svg',  color: HexColor('#1D1E20'),
+                        'assets/images/cart.svg',
+                        color: HexColor('#1D1E20'),
                       )),
                   onTap: () {
                     print('cart tapped');
@@ -103,8 +105,10 @@ class _Fav_ScreenState extends State<Fav_Screen> {
                     children: [
                       Text(
                         "Items",
-                        style:
-                            TextStyle(fontSize: 17, fontWeight: FontWeight.w500,color: HexColor('#1D1E20')),
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                            color: HexColor('#1D1E20')),
                       ),
                       SizedBox(
                         height: 5,
@@ -112,8 +116,9 @@ class _Fav_ScreenState extends State<Fav_Screen> {
                       Text(
                         "in Favorite",
                         style: TextStyle(
-                          fontWeight: FontWeight.w400, color: HexColor('#8F959E'),fontSize: 15
-                        ),
+                            fontWeight: FontWeight.w400,
+                            color: HexColor('#8F959E'),
+                            fontSize: 15),
                       )
                     ],
                   ),
@@ -133,7 +138,7 @@ class _Fav_ScreenState extends State<Fav_Screen> {
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 15,
-                              color:HexColor('#1D1E20')),
+                              color: HexColor('#1D1E20')),
                         )),
                   )
                 ],
@@ -163,29 +168,34 @@ class _Fav_ScreenState extends State<Fav_Screen> {
 
 Widget productItemBuilder(String image, String label, String price) => Column(
       children: [
-        Container(
-          height: 203,
-          width: 160,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: HexColor('#F2F2F2')),
-          child: Stack(
-            alignment: Alignment.topRight,
-            children: [
-              Image(
-                image: AssetImage(image),
-                fit: BoxFit.scaleDown,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  child: SvgPicture.asset('assets/images/Heart.svg'),
-                  onTap: () {
-                    print('Like Tapped');
-                  },
+        Expanded(
+          child: Container(
+            height: 203,
+            width: 160,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: HexColor('#F2F2F2')),
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Container(
+                  child: Image(
+                    image: AssetImage(image),
+                    fit: BoxFit.scaleDown,
+                  ),
+                  width: 165,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    child: SvgPicture.asset('assets/images/Heart.svg'),
+                    onTap: () {
+                      print('Like Tapped');
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(
