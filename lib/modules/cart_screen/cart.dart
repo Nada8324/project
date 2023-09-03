@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project/modules/order_confirm/confirm.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -11,7 +12,8 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   int count = 1;
-
+  bool check_payment=true;
+  bool check_address=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +32,7 @@ class _CartScreenState extends State<CartScreen> {
                     highlightColor: Colors.transparent,
                     child: CircleAvatar(
                         backgroundColor: HexColor('#F5F6FA'),
-                        radius: 25,
+                        radius: 22.5,
                         child:
                             SvgPicture.asset('assets/images/Arrow - Left.svg')),
                     onTap: () {
@@ -287,12 +289,19 @@ class _CartScreenState extends State<CartScreen> {
                       Container(
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: HexColor('#4A4E69')),
+                            color:check_address? HexColor('#4A4E69'):Colors.white),
                         width: 25,
                         height: 25,
-                        child: Center(
-                            child: SvgPicture.asset(
-                                'assets/images/check.svg')),
+                        child: InkWell(
+
+                          onTap: () {
+                            setState(() {
+                              check_address = !check_address;
+                            });
+                          },
+                          child: Center(
+                              child: check_address? SvgPicture.asset('assets/images/check.svg'):SvgPicture.asset('assets/images/check.svg',color: HexColor('#4A4E69'),)),
+                        ),
                       ),
                     ],
                   ),
@@ -369,12 +378,18 @@ class _CartScreenState extends State<CartScreen> {
                       Container(
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: HexColor('#4A4E69')),
+                            color:check_payment? HexColor('#4A4E69'):Colors.white),
                         width: 25,
                         height: 25,
-                        child: Center(
-                            child: SvgPicture.asset(
-                                'assets/images/check.svg')),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              check_payment = !check_payment;
+                            });
+                          },
+                          child: Center(
+                              child: check_payment? SvgPicture.asset('assets/images/check.svg'):SvgPicture.asset('assets/images/check.svg',color: HexColor('#4A4E69'),)),
+                        ),
                       ),
                     ],
                   ),
@@ -467,7 +482,10 @@ class _CartScreenState extends State<CartScreen> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 9),
                 child: InkWell(
-                  onTap: () => print('tap'),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Confirm_screen(),));
+                    print('tap');
+                  } ,
                   child: Container(
                     height: 50,
                     width: double.infinity,
@@ -483,6 +501,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
+
             ],
           ),
         ),
