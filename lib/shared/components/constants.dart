@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 List<dynamic> products = [];
 class ThemeProvider with ChangeNotifier {
+  // String font_family ="Inter";
   bool _isDarkTheme = false;
   Color textcolor = Colors.black;
   Color buttonscolor = Color(0xff8f959e);
@@ -13,6 +14,7 @@ class ThemeProvider with ChangeNotifier {
       buttonscolor = Colors.white;
       text = "Light Mode";
     } else {
+
       textcolor = Colors.black;
       buttonscolor = Color(0xff8f959e);
       text = "Dark Mode";

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:project/modules/cart_screen/cart.dart';
+import 'package:project/modules/profile_screen/profile.dart';
 import 'package:project/shared/components/constants.dart';
 import 'package:project/shared/remote/dio_helper.dart';
-
 class Home_screen extends StatelessWidget {
-  const Home_screen({super.key});
+  final _formKey = GlobalKey<FormState>();
+  final search_text = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,11 @@ class Home_screen extends StatelessWidget {
                       radius: 25,
                       child: SvgPicture.asset('assets/images/menu.svg')),
                   onTap: () {
-                    print('menu tapped');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileScreen(),
+                        ));
                   },
                 ),
                 const Spacer(),
@@ -45,7 +51,11 @@ class Home_screen extends StatelessWidget {
                         color: Colors.black,
                       )),
                   onTap: () {
-                    print('cart tapped');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CartScreen(),
+                        ));
                   },
                 ),
               ],
@@ -79,21 +89,34 @@ class Home_screen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: HexColor('#F5F6FA'),
                     ),
-                    child: TextFormField(
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: HexColor('#8F959E')),
-                      decoration: InputDecoration(
-                        prefixIcon: SvgPicture.asset(
-                          'assets/images/Search.svg',
-                          height: 20,
-                          width: 20,
-                          fit: BoxFit.scaleDown,
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                        controller: search_text,
+                        onFieldSubmitted: (value) {
+                          print(search_text.text);
+                        },
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: HexColor('#8F959E')),
+                        decoration: InputDecoration(
+                          prefixIcon: SvgPicture.asset(
+                            'assets/images/Search.svg',
+                            height: 20,
+                            width: 20,
+                            fit: BoxFit.scaleDown,
+                          ),
+                          hintText: 'Search...',
+                          contentPadding: EdgeInsets.all(15),
+                          border: InputBorder.none,
                         ),
-                        hintText: 'Search...',
-                        contentPadding: EdgeInsets.all(15),
-                        border: InputBorder.none,
                       ),
                     ),
                   ),
@@ -101,16 +124,24 @@ class Home_screen extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Container(
-                  height: 55,
-                  width: 55,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: HexColor('4A4E69'),
-                  ),
-                  child: SvgPicture.asset(
-                    'assets/images/Voice.svg',
-                    fit: BoxFit.scaleDown,
+                InkWell(
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      // show in data grid this item
+                    }
+                  },
+                  child: Container(
+                    height: 55,
+                    width: 55,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: HexColor('4A4E69'),
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/images/Search.svg',
+                      color: HexColor('#FEFEFE'),
+                      fit: BoxFit.scaleDown,
+                    ),
                   ),
                 ),
               ],
@@ -152,7 +183,8 @@ class Home_screen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) =>
                     categoryBuilder('assets/images/Adidas.svg', 'Adidas'),
-                separatorBuilder: (context, index) => const SizedBox(
+                separatorBuilder: (context, index) =>
+                const SizedBox(
                   width: 10,
                 ),
                 itemCount: 10,
@@ -171,18 +203,18 @@ class Home_screen extends StatelessWidget {
                       color: Colors.black),
                 ),
                 const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    print('View All Pressed');
-                  },
-                  child: Text(
-                    'View All',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
-                        color: HexColor('#8F959E')),
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     ;
+                //   },
+                //   child: Text(
+                //     'View All',
+                //     style: TextStyle(
+                //         fontWeight: FontWeight.w400,
+                //         fontSize: 13,
+                //         color: HexColor('#8F959E')),
+                //   ),
+                // ),
               ],
             ),
             Expanded(
@@ -190,10 +222,11 @@ class Home_screen extends StatelessWidget {
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
-                itemBuilder: (context, index) => productItemBuilder(
-                    'assets/images/person_photo_1.png',
-                    'Nike Sportswear Club Fleece',
-                    '\$99'),
+                itemBuilder: (context, index) =>
+                    productItemBuilder(
+                        'assets/images/person_photo_1.png',
+                        'Nike Sportswear Club Fleece',
+                        '\$99'),
                 itemCount: 10,
                 padding: EdgeInsets.zero,
               ),
@@ -204,65 +237,74 @@ class Home_screen extends StatelessWidget {
     );
   }
 
-  Widget productItemBuilder(String image, String label, String price) => Column(
-        children: [
-          Expanded(
-            child: Container(
-              height: 203,
-              width: 165,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: HexColor('#F2F2F2')),
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Container(
-                    child: Image(
-                      image: AssetImage(image),
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.center,
-                    ),
-                    width: 165,
+  Widget productItemBuilder(String image, String label, String price) {
+    bool fav=false;
+    return Column(
+      children: [
+        Expanded(
+          child: Container(
+            height: 203,
+            width: 165,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: HexColor('#F2F2F2')),
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Container(
+                  child: Image(
+                    image: AssetImage(image),
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.center,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      child: SvgPicture.asset('assets/images/Heart.svg'),
-                      onTap: () {
-                        print('Like Tapped');
-                      },
-                    ),
+                  width: 165,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    child: !fav
+                        ? SvgPicture.asset('assets/images/Heart.svg')
+                        : Icon(Icons.favorite),
+                    onTap: () {
+
+                      fav = !fav;
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 11,
-                      color: Colors.black)),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(price,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 13,
-                      color: Colors.black)),
-            ],
-          ),
-        ],
-      );
-  Widget categoryBuilder(String photo, String text) => InkWell(
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(label,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 11,
+                    color: Colors.black)),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(price,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                    color: Colors.black)),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget categoryBuilder(String photo, String text) {
+
+      return InkWell(
         onTap: () {
-          print('Category Tapped');
+          //show in data grid items with same category
         },
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
@@ -289,7 +331,7 @@ class Home_screen extends StatelessWidget {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 17, horizontal: 10),
+                const EdgeInsets.symmetric(vertical: 17, horizontal: 10),
                 child: Text(
                   text,
                   style: const TextStyle(
@@ -300,6 +342,7 @@ class Home_screen extends StatelessWidget {
           ),
         ),
       );
+}
 }
 
 /*Expanded(
