@@ -62,12 +62,13 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  void getProductByCategory() {
+  Product? productByCategory;
+  void getProductByCategory(int id) {
     emit(ShopCategoryDataLoading());
-    DioHelper.get(
-      url: category,
-    ).then((value) {
-      cat = Category.fromJson(value.data);
+    DioHelper.get(url: productBycategory, query: {
+      'category_id': id,
+    }).then((value) {
+      productByCategory = Product.fromJson(value.data);
       emit(ShopCategoryDataSuccess());
     }).catchError((error) {
       print(error.toString());

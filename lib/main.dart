@@ -22,7 +22,9 @@
 //         debugShowCheckedModeBanner: false, home: Layout_screen());
 //   }
 // }
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project/layout/home_layout.dart';
 import 'package:project/modules/splash_screen/splash_screen.dart';
 
@@ -31,9 +33,12 @@ import 'package:project/shared/remote/dio_helper.dart';
 
 import 'package:provider/provider.dart';
 
+import 'layout/cubit/cubit.dart';
 import 'modules/profile_screen/profile.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   DioHelper.init();
   runApp(
     ChangeNotifierProvider(
@@ -49,10 +54,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: themeProvider.themeData,
-      home:SplashScreen(),
+    return BlocProvider(
+      create: (BuildContext context) => ShopCubit()
+        ..getHomeData()
+        ..getCategory(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: themeProvider.themeData,
+        home: SplashScreen(),
+      ),
     );
   }
 }

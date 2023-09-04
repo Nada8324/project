@@ -63,42 +63,37 @@ class _Layout_screenState extends State<Layout_screen> {
   ];
 
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => ShopCubit()
-        ..getHomeData()
-        ..getCategory(),
-      child: BlocConsumer<ShopCubit, ShopStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          var cubit = ShopCubit.get(context);
-          final themeProvider = Provider.of<ThemeProvider>(context);
-          return Scaffold(
-            backgroundColor: HexColor('#FEFEFE'),
-            bottomNavigationBar: BottomNavigationBar(
-              selectedFontSize: 0,
-              unselectedFontSize: 0,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.black,
-              items: cubit.currentIndex == 0
-                  ? HomeSelected
-                  : (cubit.currentIndex == 1 ? FavoriteSelected : others),
-              onTap: (index) {
-                if (index == 0 || index == 1) {
-                  cubit.changeIndex(index);
-                } else if (index == 2) {
-                  navigateTo(context, CartScreen());
-                } else {
-                  navigateTo(context, ProfileScreen());
-                }
-              },
-              currentIndex: cubit.currentIndex,
-            ),
-            body: cubit.screens[cubit.currentIndex],
-          );
-        },
-      ),
+    return BlocConsumer<ShopCubit, ShopStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = ShopCubit.get(context);
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return Scaffold(
+          backgroundColor: HexColor('#FEFEFE'),
+          bottomNavigationBar: BottomNavigationBar(
+            selectedFontSize: 0,
+            unselectedFontSize: 0,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.black,
+            items: cubit.currentIndex == 0
+                ? HomeSelected
+                : (cubit.currentIndex == 1 ? FavoriteSelected : others),
+            onTap: (index) {
+              if (index == 0 || index == 1) {
+                cubit.changeIndex(index);
+              } else if (index == 2) {
+                navigateTo(context, CartScreen());
+              } else {
+                navigateTo(context, ProfileScreen());
+              }
+            },
+            currentIndex: cubit.currentIndex,
+          ),
+          body: cubit.screens[cubit.currentIndex],
+        );
+      },
     );
   }
 }

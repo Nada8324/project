@@ -10,12 +10,13 @@ import 'package:project/modules/cart_screen/cart.dart';
 import 'package:project/shared/components/constants.dart';
 import 'package:project/shared/remote/dio_helper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:project/shared/remote/endpoint.dart';
 
 import '../../layout/cubit/cubit.dart';
+import '../category_screen/category.dart';
 import '../setting_screen/setting.dart';
 
 class Home_screen extends StatelessWidget {
-
   final _formKey = GlobalKey<FormState>();
   final search_text = TextEditingController();
   @override
@@ -42,7 +43,11 @@ class Home_screen extends StatelessWidget {
                         radius: 25,
                         child: SvgPicture.asset('assets/images/menu.svg')),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => TheSettingScreen(),));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TheSettingScreen(),
+                          ));
                     },
                   ),
                   const Spacer(),
@@ -57,7 +62,11 @@ class Home_screen extends StatelessWidget {
                           color: Colors.black,
                         )),
                     onTap: () {
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CartScreen(),
+                          ));
                     },
                   ),
                 ],
@@ -140,7 +149,8 @@ class Home_screen extends StatelessWidget {
                         color: HexColor('4A4E69'),
                       ),
                       child: SvgPicture.asset(
-                        'assets/images/Search.svg',color: Colors.white,
+                        'assets/images/Search.svg',
+                        color: Colors.white,
                         fit: BoxFit.scaleDown,
                       ),
                     ),
@@ -188,7 +198,8 @@ class Home_screen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var model = ShopCubit.get(context).cat;
                         CategoryModel? c = model!.data.category[index];
-                        return categoryBuilder('${c.image}', '${c.name}');
+                        return categoryBuilder(
+                            '${c.image}', '${c.name}', context, c.id);
                       },
                       separatorBuilder: (context, index) => const SizedBox(
                         width: 10,
@@ -315,9 +326,15 @@ class Home_screen extends StatelessWidget {
           ),
         ],
       );
-  Widget categoryBuilder(String photo, String text) => InkWell(
+  Widget categoryBuilder(String photo, String text, context, id) => InkWell(
         onTap: () {
-          print('Category Tapped');
+          ShopCubit.get(context).getProductByCategory(id);
+          print(ShopCubit.get(context).productByCategory?.data.products.length);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Category_screen(),
+              ));
         },
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
