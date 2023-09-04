@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 import '../../layout/cubit/cubit.dart';
 import '../../layout/cubit/states.dart';
+import '../../layout/model/product_by_category.dart';
 import '../../layout/model/product_modedl.dart';
 import '../cart_screen/cart.dart';
 
@@ -85,7 +86,7 @@ class _Category_screenState extends State<Category_screen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "(num of products)Items",
+                          '${ShopCubit.get(context).productByCategory!.data.products.length}',
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w500,
@@ -134,11 +135,15 @@ class _Category_screenState extends State<Category_screen> {
                       crossAxisCount: 2),
                   itemBuilder: (context, index) {
                     var model = ShopCubit.get(context).productByCategory;
-                    ProductModel? p = model?.data.products[index];
+                    ProductbycategoryModel? p = model?.data.products[index];
                     return productItemBuilder(
                         '${p?.image}', '${p?.name}', '${p?.old_price}\$');
                   },
-                  itemCount: 10,
+                  itemCount: ShopCubit.get(context)
+                      .productByCategory!
+                      .data
+                      .products
+                      .length,
                   padding: EdgeInsets.zero,
                 ),
               ),
@@ -163,7 +168,7 @@ class _Category_screenState extends State<Category_screen> {
                 children: [
                   Container(
                     child: Image(
-                      image: AssetImage(image),
+                      image: NetworkImage(image),
                       fit: BoxFit.scaleDown,
                     ),
                     width: 165,

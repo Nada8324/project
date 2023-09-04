@@ -329,7 +329,6 @@ class Home_screen extends StatelessWidget {
   Widget categoryBuilder(String photo, String text, context, id) => InkWell(
         onTap: () {
           ShopCubit.get(context).getProductByCategory(id);
-          print(ShopCubit.get(context).productByCategory?.data.products.length);
           Navigator.push(
               context,
               MaterialPageRoute(

@@ -11,6 +11,7 @@ import 'package:project/shared/remote/endpoint.dart';
 import '../../modules/Home_screen/home_screen.dart';
 import '../../shared/remote/dio_helper.dart';
 import '../model/category_model.dart';
+import '../model/product_by_category.dart';
 
 class ShopCubit extends Cubit<ShopStates> {
   ShopCubit() : super(ShopInitialState());
@@ -62,13 +63,13 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  Product? productByCategory;
+  Productbycategory? productByCategory;
   void getProductByCategory(int id) {
     emit(ShopCategoryDataLoading());
     DioHelper.get(url: productBycategory, query: {
       'category_id': id,
     }).then((value) {
-      productByCategory = Product.fromJson(value.data);
+      productByCategory = Productbycategory.fromJson(value.data);
       emit(ShopCategoryDataSuccess());
     }).catchError((error) {
       print(error.toString());
